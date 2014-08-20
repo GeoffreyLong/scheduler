@@ -21,12 +21,18 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  addEvent("Geoff");
   res.render('index', { title: 'Express' });
 });
 
 var addEvent = function(name){
   new Event({name: name}).save();
+}
+
+var getAllEvents = function(){
+  return Event.find(function(error, response){
+    // will want to res.send the response back
+    console.log(response);
+  });
 }
 
 module.exports = router;
