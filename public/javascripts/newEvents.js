@@ -1,5 +1,4 @@
 $(document).ready(function(){
-  alert('cool');
   /*$.ajax({
     url: "/save",
     type: "POST",
