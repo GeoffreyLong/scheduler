@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  ul
+    for event in events
+      li.name #{event['name']}
+      li.priority #{event['priority']}

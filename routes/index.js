@@ -25,6 +25,13 @@ router.get('/', function(req, res) {
 });
 
 router.get('/events/show', function(req,res) {
+  Event.find(function(error, response){
+    // will want to res.send the response back
+    res.render('showEvents', { events: response });
+  });
+});
+
+router.get('events/created', function(req,res) {
   res.write("<script type='text/javascript'>alert('Successfully added')</script>");
 });
 
@@ -32,15 +39,10 @@ router.get('/events/create', function(req,res) {
   res.render('newEvents', { title: 'Express', script: '/javascripts/newEvents.js' })
 });
 
+
+
 var addEvent = function(name){
   new Event({name: name}).save();
-}
-
-var getAllEvents = function(){
-  return Event.find(function(error, response){
-    // will want to res.send the response back
-    console.log(response);
-  });
 }
 
 module.exports = router;
