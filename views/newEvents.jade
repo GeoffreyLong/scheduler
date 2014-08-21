@@ -1,6 +1,7 @@
 extends layout
 
 block content
+  - var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
   table
     tr
       td Event Name
@@ -11,6 +12,9 @@ block content
       td
         select
           // look to see if I can do i in range
-          each value, i in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+          each value, i in numbers 
             option(value=i) #{i}
+    tr
+      td 
+        input(type="button", value="submit")#submit
 
