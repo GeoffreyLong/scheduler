@@ -1,24 +1,25 @@
 $(document).ready(function(){
-  /*$.ajax({
-    url: "/save",
-    type: "POST",
-    dataType: "json",
-    data: {objectData: someObject},
-    contentType: "application/json",
-    cache: false,
-    timeout: 5000,
-    complete: function() {
-      //called when complete
-      console.log('process complete');
-    },
-
-    success: function(data) {
-      console.log(data);
-      console.log('process sucess');
-   },
-
-    error: function() {
-      console.log('process error');
-    },
-  });*/
+  $('#submit').click(function(e){
+    e.preventDefault();
+    console.log('submit clicked');
+          
+    var data = {};
+    data.name = $('#name').val();
+    data.priority = $('#priority').find('option:selected').text();
+    if (data.name != ''){
+      $.ajax({
+        type: 'POST',
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        url: 'http://localhost:3000/event',
+        success: function(data) {
+            console.log('success');
+            console.log(JSON.stringify(data));
+        }
+      });
+    }
+    else{
+      alert('Need Name');
+    }
+  });
 });
