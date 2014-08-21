@@ -24,6 +24,14 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
 });
 
+router.get('/events/show', function(req,res) {
+  res.write("<script type='text/javascript'>alert('Successfully added')</script>");
+});
+
+router.get('/events/create', function(req,res) {
+  res.render('newEvents', { title: 'Express', script: '/javascripts/newEvents.js' })
+});
+
 var addEvent = function(name){
   new Event({name: name}).save();
 }
