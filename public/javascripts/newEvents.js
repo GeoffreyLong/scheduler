@@ -13,8 +13,8 @@ $(document).ready(function(){
         contentType: 'application/json',
         url: 'http://localhost:3000/event',
         success: function(data) {
-            console.log('success');
-            console.log(JSON.stringify(data));
+          alert("Successfully added");
+          window.location.replace("http://localhost:3000/events/show");
         }
       });
     }
