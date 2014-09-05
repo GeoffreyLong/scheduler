@@ -29,10 +29,10 @@ li.newEvent{
   -webkit-transition: all .5s ease;
   -moz-transition: all .5s ease;
   transition: all .5s ease;
+  overflow: hidden;
 }
 .event .eventButton{
   height: 20px;
-  width: 50px;
   display: none;
 }
 .eventButton.start{
