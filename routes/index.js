@@ -30,7 +30,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/events/show', function(req,res) {
-  Event.find(function(error, response){
+  Event.find().sort({priority: -1}).exec(function(error, response){
     // will want to res.send the response back
     res.render('showEvents', { events: response, script: '/javascripts/showEvents.js' });
   });
