@@ -6,3 +6,8 @@ block content
       li(class="event", data-id=event['_id'])
         span.name #{event['name']}
         span.priority #{event['priority']}
+        //button(class="eventButton", id="eventEdit") Edit
+        //button(class="eventButton", id="eventRemove") Remove
+        button(class="eventButton", id="eventStart") Start
+        button(class="eventButton", id="eventPause") Pause
+        //button(class="eventButton", id="eventCompleted") Completed 

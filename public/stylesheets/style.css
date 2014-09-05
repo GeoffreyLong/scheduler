@@ -5,6 +5,7 @@ body{
 a{
   color: #00B7FF;
 }
+
 .event{
   list-style-type: none;
   border: 1px solid #000000;
@@ -15,9 +16,33 @@ a{
   -webkit-transition: all .5s ease;
   -moz-transition: all .5s ease;
   transition: all .5s ease;}
+.event .eventButton{
+  height: 20px;
+  width: 50px;
+  display: none;
+}
+#start{
+
+}
+#stop{
+
+}
+#pause{
+
+}
+#edit{
+
+}
+#remove{
+
+}
 .event.expand {
   height: 100px;
 }
+.event.expand .eventButton {
+  display: block;
+}
+
 .name{
   font-weight: bold;
 }
