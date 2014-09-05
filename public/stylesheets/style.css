@@ -5,6 +5,10 @@ body{
 a{
   color: #00B7FF;
 }
+.indexLink{
+  display: block;
+  margin: 10px;
+}
 
 li.newEvent{
   font-weight: bold;
@@ -29,10 +33,10 @@ li.newEvent{
   -webkit-transition: all .5s ease;
   -moz-transition: all .5s ease;
   transition: all .5s ease;
+  overflow: hidden;
 }
 .event .eventButton{
   height: 20px;
-  width: 50px;
   display: none;
 }
 .eventButton.start{
