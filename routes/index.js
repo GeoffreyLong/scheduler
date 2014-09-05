@@ -40,16 +40,30 @@ app.get('/event/:id', function(req,res){
   
 });
 
-app.post('/event', function(req,res) {
+app.post('/event/add', function(req,res) {
   console.log(req.body);
   new Event({name: req.body.name, priority: req.body.priority}).save(function(err,saved){
-    if (err) res.status(400).send(err)
+    if (err) res.status(500).send(err);
     res.status(200).end();
   });
 });
 
 app.get('/events/create', function(req,res) {
   res.render('newEvents', { title: 'Express', script: '/javascripts/newEvents.js' })
+});
+
+// Probably best to do this via post so that people
+// can't delete things willy nilly
+app.post('/event/remove', function(req,res){
+  // The req comes in surrounded by quotes... have to watch for this
+  var id = req.body.id.replace(/['"]+/g, '');
+  Event.findByIdAndRemove(id, function(err, removed){
+    if (err){
+      console.log(err);
+      res.status(500).send(err);
+    }
+    res.status(200).end();
+  });
 });
 
 module.exports = app;

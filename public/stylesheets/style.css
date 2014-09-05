@@ -35,19 +35,19 @@ li.newEvent{
   width: 50px;
   display: none;
 }
-#start{
+.eventButton.start{
 
 }
-#stop{
+.eventButton.stop{
 
 }
-#pause{
+.eventButton.pause{
 
 }
-#edit{
+.eventButton.edit{
 
 }
-#remove{
+.eventButton.remove{
 
 }
 .event.expand {
