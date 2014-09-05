@@ -2,6 +2,9 @@ extends layout
 
 block content
   ul
+    li(class="newEvent") 
+      span Add Event
+      span.priority +
     for event in events
       li(class="event", data-id=event['_id'])
         span.name #{event['name']}

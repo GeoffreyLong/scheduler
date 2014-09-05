@@ -42,7 +42,10 @@ app.get('/event/:id', function(req,res){
 
 app.post('/event', function(req,res) {
   console.log(req.body);
-  new Event({name: req.body.name, priority: req.body.priority}).save();
+  new Event({name: req.body.name, priority: req.body.priority}).save(function(err,saved){
+    if (err) res.status(400).send(err)
+    res.status(200).end();
+  });
 });
 
 app.get('/events/create', function(req,res) {

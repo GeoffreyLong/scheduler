@@ -12,9 +12,14 @@ $(document).ready(function(){
         data: JSON.stringify(data),
         contentType: 'application/json',
         url: 'http://localhost:3000/event',
-        success: function(data) {
-          alert("Successfully added");
-          window.location.replace("http://localhost:3000/events/show");
+        statusCode: {
+          200: function() {
+            alert("Successfully added");
+            window.location.replace("http://localhost:3000/events/show");
+          },
+          400: function() {
+            alert("Didn't work");
+          }
         }
       });
     }

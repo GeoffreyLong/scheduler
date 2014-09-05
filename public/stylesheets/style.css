@@ -6,6 +6,19 @@ a{
   color: #00B7FF;
 }
 
+li.newEvent{
+  font-weight: bold;
+  color: #209900;
+  list-style-type: none;
+  border: 1px solid #000000;
+  margin: 10px;
+  padding: 10px;
+  height: 20px;
+  width: 300px;
+}
+.li.plusSign{
+  float:right;
+}
 .event{
   list-style-type: none;
   border: 1px solid #000000;
@@ -15,7 +28,8 @@ a{
   width: 300px;
   -webkit-transition: all .5s ease;
   -moz-transition: all .5s ease;
-  transition: all .5s ease;}
+  transition: all .5s ease;
+}
 .event .eventButton{
   height: 20px;
   width: 50px;

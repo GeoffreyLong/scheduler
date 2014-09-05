@@ -3,4 +3,7 @@ $(document).ready(function(){
     $(this).toggleClass("expand");
     console.log($(this).attr("data-id"));
   });
+  $('.newEvent').click(function(){
+    window.location.replace("http://localhost:3000/events/create");    
+  });
 });
