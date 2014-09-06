@@ -5,6 +5,10 @@ body{
 a{
   color: #00B7FF;
 }
+.indexLink{
+  display: block;
+  margin: 10px;
+}
 
 li.newEvent{
   font-weight: bold;

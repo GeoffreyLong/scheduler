@@ -26,7 +26,7 @@ app.use( bodyParser.urlencoded() ); // to support URL-encoded bodies
 
 /* GET home page. */
 app.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Scheduler' });
 });
 
 app.get('/events/show', function(req,res) {
