@@ -9,7 +9,8 @@ $(document).ready(function(){
 
   $('.remove').click(function(e){
     e.stopPropagation();
-    var id = $(this).parent().attr("data-id");
+    var event = $(this).parent();
+    var id = event.attr("data-id");
     console.log('Remove clicked, event_id = ' + id);      
     var data = {};
     data.id = id;
@@ -20,8 +21,8 @@ $(document).ready(function(){
       url: 'http://localhost:3000/event/remove',
       statusCode: {
         200: function() {
+          event.remove();
           alert("Successfully removed");
-          window.location.replace("http://localhost:3000/events/show");
         },
         400: function() {
           alert("Didn't work");
