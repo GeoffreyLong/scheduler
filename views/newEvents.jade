@@ -6,14 +6,18 @@ block content
     tr
       td Event Name
       td
-        input(type="text", placeholder="Event name")#name
+        input(type="text", placeholder="Event name", value=name)#name
     tr
       td Priority
       td
         select#priority
           // look to see if I can do i in range
-          each value, i in numbers 
-            option(value=i) #{i}
+          each value, i in numbers
+            if curPriority == i
+              option(value=i, selected) #{i}
+            else
+              option(value=i) #{i}
+
     tr
       td 
         input(type="button", value="submit")#submit

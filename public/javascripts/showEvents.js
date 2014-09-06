@@ -31,4 +31,22 @@ $(document).ready(function(){
     });
   });
 
+  $('.edit').click(function(e){
+    e.stopPropagation();
+    var event = $(this).parent();
+    var id = event.attr("data-id");
+    console.log('update clicked, event_id = ' + id);      
+    $.ajax({
+      type: 'GET',
+      contentType: 'application/json',
+      url: 'http://localhost:3000/event/update/' + id,
+      statusCode: {
+        200: function() {
+        },
+        400: function() {
+          alert("Didn't work");
+        }
+      }
+    });
+  });
 });

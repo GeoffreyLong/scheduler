@@ -49,7 +49,7 @@ app.post('/event/add', function(req,res) {
 });
 
 app.get('/events/create', function(req,res) {
-  res.render('newEvents', { title: 'Express', script: '/javascripts/newEvents.js' })
+  res.render('newEvents', { script: '/javascripts/newEvents.js' })
 });
 
 // Probably best to do this via post so that people
@@ -63,6 +63,21 @@ app.post('/event/remove', function(req,res){
       res.status(500).send(err);
     }
     res.status(200).end();
+  });
+});
+
+app.get('/event/update/:id', function(req,res){
+  var id = req.params.id.replace(/['"]+/g, '');
+  Event.findById(id, function(err, response){
+    if (err){
+      console.log(err);
+      res.status(500).send(err);
+    }
+    return res.render('newEvents', {
+      name: response.name,
+      priority: response.priority,
+      script: '/javascripts/newEvents.js',
+    });
   });
 });
 
