@@ -13,7 +13,7 @@ block content
         select#priority
           // look to see if I can do i in range
           each value, i in numbers
-            if curPriority == i
+            if priority == i
               option(value=i, selected) #{i}
             else
               option(value=i) #{i}

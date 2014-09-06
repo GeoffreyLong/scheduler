@@ -68,12 +68,12 @@ app.post('/event/remove', function(req,res){
 
 app.get('/event/update/:id', function(req,res){
   var id = req.params.id.replace(/['"]+/g, '');
-  Event.findById(id, function(err, response){
+  Event.findByIdAndRemove(id, function(err, response){
     if (err){
       console.log(err);
       res.status(500).send(err);
     }
-    return res.render('newEvents', {
+    res.render('newEvents', {
       name: response.name,
       priority: response.priority,
       script: '/javascripts/newEvents.js',
