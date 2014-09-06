@@ -3,11 +3,11 @@ $(document).ready(function(){
     $(this).toggleClass("expand");
     console.log($(this).attr("data-id"));
   });
-  $('.newEvent').click(function(){
-    window.location.replace("http://localhost:3000/events/create");    
+  $('.createEvent').click(function(){
+    window.location.replace("http://localhost:3000/events/eventForm");    
   });
 
-  $('.remove').click(function(e){
+  $('.deleteEvent').click(function(e){
     e.stopPropagation();
     var event = $(this).parent();
     var id = event.attr("data-id");
@@ -18,7 +18,7 @@ $(document).ready(function(){
       type: 'POST',
       data: JSON.stringify(data),
       contentType: 'application/json',
-      url: 'http://localhost:3000/event/remove',
+      url: 'http://localhost:3000/event/delete',
       statusCode: {
         200: function() {
           event.remove();
@@ -31,7 +31,7 @@ $(document).ready(function(){
     });
   });
 
-  $('.edit').click(function(e){
+  $('.updateEvent').click(function(e){
     e.stopPropagation();
     var event = $(this).parent();
     var id = event.attr("data-id");

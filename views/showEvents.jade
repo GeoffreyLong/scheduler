@@ -2,15 +2,15 @@ extends layout
 
 block content
   ul
-    li(class="newEvent") 
+    li(class="createEvent") 
       span Add Event
       span.priority +
     for event in events
       li(class="event", data-id=event['_id'])
         span.name #{event['name']}
         span.priority #{event['priority']}
-        button(class="eventButton edit") Edit
-        button(class="eventButton remove") Remove
+        button(class="eventButton updateEvent") Edit
+        button(class="eventButton deleteEvent") Remove
         //button(class="eventButton eventStart") Start
         //button(class="eventButton eventPause") Pause
         //button(class="eventButton", id="eventCompleted") Completed 

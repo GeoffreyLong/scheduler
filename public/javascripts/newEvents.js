@@ -11,7 +11,7 @@ $(document).ready(function(){
         type: 'POST',
         data: JSON.stringify(data),
         contentType: 'application/json',
-        url: 'http://localhost:3000/event/add',
+        url: 'http://localhost:3000/event/create',
         statusCode: {
           200: function() {
             alert("Successfully added");
