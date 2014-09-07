@@ -30,9 +30,13 @@ li.createEvent{
   padding: 10px;
   height: 20px;
   width: 300px;
-  -webkit-transition: all .5s ease;
-  -moz-transition: all .5s ease;
-  transition: all .5s ease;
+  /* 
+   * Worth noting that fadeout didn't work 
+   * when the transition was applied to 'all' instead of 'height'
+  */
+  -webkit-transition: height .5s ease;
+  -moz-transition: height .5s ease;
+  transition: height .5s ease;
   overflow: hidden;
 }
 .event .eventButton{

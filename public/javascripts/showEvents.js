@@ -24,8 +24,8 @@ $(document).ready(function(){
           /*alert("Successfully added").delay(1000).fadeOut(function() {
               $(this).remove();
           }); */         
-          alert("Successfully removed");
-          event.fadeOut(function(){ 
+          event.removeClass("expand");
+          event.fadeOut(1000, function(){ 
             $(this).remove();
           });
         },
