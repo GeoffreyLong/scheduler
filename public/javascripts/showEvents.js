@@ -24,7 +24,7 @@ $(document).ready(function(){
           /*alert("Successfully added").delay(1000).fadeOut(function() {
               $(this).remove();
           }); */         
-          alert("Successfully added");
+          alert("Successfully removed");
           event.fadeOut(function(){ 
             $(this).remove();
           });
