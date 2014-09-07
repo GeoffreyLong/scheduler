@@ -21,8 +21,13 @@ $(document).ready(function(){
       url: 'http://localhost:3000/event/delete',
       statusCode: {
         200: function() {
-          event.remove();
-          alert("Successfully removed");
+          /*alert("Successfully added").delay(1000).fadeOut(function() {
+              $(this).remove();
+          }); */         
+          alert("Successfully added");
+          event.fadeOut(function(){ 
+            $(this).remove();
+          });
         },
         400: function() {
           alert("Didn't work");

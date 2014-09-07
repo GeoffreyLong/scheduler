@@ -11,8 +11,9 @@ mongoose.connect('mongodb://localhost/scheduler', function (error) {
 
 var Schema = mongoose.Schema;
 var EventSchema = new Schema({
-  name: String,
-  priority: Number,
+    name: String,
+    priority: Number,
+    dateCreated: Date,
 });
 
 var Event = mongoose.model('events', EventSchema);
@@ -42,7 +43,11 @@ app.get('/event/:id', function(req,res){
 
 app.post('/event/create', function(req,res) {
   console.log(req.body);
-  new Event({name: req.body.name, priority: req.body.priority}).save(function(err,saved){
+  new Event({
+      name: req.body.name, 
+      priority: req.body.priority,
+      dateCreated: req.body.dateCreated,
+  }).save(function(err,saved){
     if (err) res.status(500).send(err);
     res.status(200).end();
   });
