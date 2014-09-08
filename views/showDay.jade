@@ -1,10 +1,11 @@
 extends layout
 
 block content
-  table(id='dayCalendar')
+  table(class='dayCalendarTable' id='dayTimeLabel')
     - for(var i=0; i<18*4; i++)
       tr
         if (i%4 ==0)
+          td(rowspan='4') #{i/4+6}H
           td(class='borderTime') :00
         if (i%4 == 1)
           td :15
@@ -12,3 +13,12 @@ block content
           td :30
         if (i%4 == 3)
           td :45
+
+  // May not be necessary or even useful
+  table(class='dayCalendarTable' id='dayEvents')
+    - for(var i=0; i<18*4; i++)
+      tr
+        if (i%4 ==0)
+          td(class='hourStart')
+        else
+          td

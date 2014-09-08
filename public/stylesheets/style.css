@@ -104,14 +104,27 @@ li.createEvent{
   background:#FFFFFF;
 }
 
-#dayCalendar{
+.dayCalendarTable{
   border: 1px solid black;
   position:absolute;
-  width:60%;
+  margin-bottom: 50px;
+}
+.dayCalendarTable td{
+  height:20px;
+}
+#dayTimeLabel{
   left:20%;
 }
-#dayCalendar td{
-}
-#dayCalendar .borderTime{
+#dayTimeLabel .borderTime{
   border-top: 1px solid black;
+}
+#dayTimeLabel .timeLabel{
+  width:30px;
+}
+#dayEvents{
+  left:25%;
+}
+/* Hacky workaround to adjust for border heights */
+#dayEvents .hourStart {
+  border-top: 1px solid white;
 }
