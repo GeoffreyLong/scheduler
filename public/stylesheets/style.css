@@ -105,13 +105,16 @@ li.createEvent{
 }
 
 #dayCalendar{
-  border: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
   position:absolute;
   width:60%;
   left:20%;
 }
 #dayCalendar td{
+  height:80px;
 }
-#dayCalendar .borderTime{
-  border-top: 1px solid black;
+#dayCalendar tr{
+  outline: 1px solid black;
+  vertical-align: top;
 }

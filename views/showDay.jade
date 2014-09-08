@@ -2,13 +2,9 @@ extends layout
 
 block content
   table(id='dayCalendar')
-    - for(var i=0; i<18*4; i++)
+    - for(var i=0; i<18; i++)
       tr
-        if (i%4 ==0)
-          td(class='borderTime') :00
-        if (i%4 == 1)
-          td :15
-        if (i%4 == 2)
-          td :30
-        if (i%4 == 3)
-          td :45
+        td :00
+        td :15
+        td :30
+        td :45
