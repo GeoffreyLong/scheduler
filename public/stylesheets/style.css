@@ -107,14 +107,14 @@ li.createEvent{
 #dayCalendar{
   border-left: 1px solid black;
   border-right: 1px solid black;
+  width:10000px;
   position:absolute;
-  width:60%;
-  left:20%;
 }
 #dayCalendar td{
-  height:80px;
+  width:360px;
 }
-#dayCalendar tr{
+#dayCalendar #dayTimeLabel{
   outline: 1px solid black;
   vertical-align: top;
+  height:20px;
 }

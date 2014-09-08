@@ -2,8 +2,8 @@ extends layout
 
 block content
   table(id='dayCalendar')
-    - for(var i=0; i<18; i++)
-      tr
+    tr(id='dayTimeLabel')
+      - for(var i=0; i<18; i++)
         td :00
         td :15
         td :30
