@@ -76,7 +76,7 @@ li.createEvent{
 
 
 
-#calendar{
+#monthCalendar{
   position:absolute;
   left:4.5%;
   top:5%;
@@ -84,22 +84,34 @@ li.createEvent{
   width:91%;
   border: 1px solid black;
 }
-#calendar td{
+#monthCalendar td{
   border: 1px solid black;
 }
-#calendar tr:first-child{
+#monthCalendar tr:first-child{
   font-weight:bold;
   background:#123456;
   color:#FFFFFF;
   text-align:center;
   height:5%;
 }
-#calendar .calendarDay{
+#monthCalendar .calendarDay{
   background:#AACCFF;
   width:13%;
   text-align:center;
   vertical-align:middle;
 }
-#calendar .calendarDay:hover{
+#monthCalendar .calendarDay:hover{
   background:#FFFFFF;
+}
+
+#dayCalendar{
+  border: 1px solid black;
+  position:absolute;
+  width:60%;
+  left:20%;
+}
+#dayCalendar td{
+}
+#dayCalendar .borderTime{
+  border-top: 1px solid black;
 }

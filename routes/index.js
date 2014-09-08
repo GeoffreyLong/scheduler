@@ -93,11 +93,11 @@ app.get('/calendar/month', function(req, res){
 });
 
 app.get('/calendar/week', function(req, res){
-
+  res.render('showWeek', { script: '/javascripts/showWeek.js' });
 });
 
 app.get('/calendar/day', function(req, res){
-
+  res.render('showDay', { script: '/javascripts/showDay.js' });
 });
 
 

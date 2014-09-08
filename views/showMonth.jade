@@ -2,7 +2,7 @@ extends layout
 
 block content
   - var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]  
-  table(id='calendar')
+  table(id='monthCalendar')
     tr
       each value, i in days
         td #{value}
