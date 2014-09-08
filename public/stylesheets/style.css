@@ -84,7 +84,7 @@ li.createEvent{
   width:91%;
   border: 1px solid black;
 }
-#calendar tr,td{
+#calendar td{
   border: 1px solid black;
 }
 #calendar tr:first-child{
