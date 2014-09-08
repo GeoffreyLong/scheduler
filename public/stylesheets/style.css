@@ -104,17 +104,28 @@ li.createEvent{
   background:#FFFFFF;
 }
 
-#dayCalendar{
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-  width:10000px;
+.dayCalendarTable{
+  border: 1px solid black;
   position:absolute;
+  margin-bottom: 50px;
 }
-#dayCalendar td{
-  width:360px;
-}
-#dayCalendar #dayTimeLabel{
-  outline: 1px solid black;
-  vertical-align: top;
+.dayCalendarTable td{
   height:20px;
+}
+#dayTimeLabel{
+  left:20%;
+}
+#dayTimeLabel .borderTime{
+  border-top: 1px solid black;
+>>>>>>> temp
+}
+#dayTimeLabel .timeLabel{
+  width:30px;
+}
+#dayEvents{
+  left:25%;
+}
+/* Hacky workaround to adjust for border heights */
+#dayEvents .hourStart {
+  border-top: 1px solid white;
 }
