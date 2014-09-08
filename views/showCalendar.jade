@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  table(id='calendar')
+    tr(class='dates')
+      td Sunday
+      td Monday
+      td Tuesday
+      td Wednesday
+      td Thursday
+      td Friday
+      td Saturday
+    - for(var i=0; i<5; i++)
+      tr
+        - for(var j=0; j<7; j++)
+          td(class='calendarDay')

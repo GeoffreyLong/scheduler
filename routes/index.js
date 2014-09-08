@@ -86,4 +86,11 @@ app.get('/event/update/:id', function(req,res){
   });
 });
 
+
+
+app.get('/calendar/show', function(req, res){
+  res.render('showCalendar', { script: '/javascripts/showCalendar.js' });
+});
+
+
 module.exports = app;
