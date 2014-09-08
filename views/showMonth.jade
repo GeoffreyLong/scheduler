@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  - var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]  
+  table(id='calendar')
+    tr
+      each value, i in days
+        td #{value}
+    - for(var i=0; i<5; i++)
+      tr
+        each value, j in days
+          td(class='calendarDay' id=value+i)

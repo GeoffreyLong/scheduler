@@ -88,8 +88,16 @@ app.get('/event/update/:id', function(req,res){
 
 
 
-app.get('/calendar/show', function(req, res){
-  res.render('showCalendar', { script: '/javascripts/showCalendar.js' });
+app.get('/calendar/month', function(req, res){
+  res.render('showMonth', { script: '/javascripts/showMonth.js' });
+});
+
+app.get('/calendar/week', function(req, res){
+
+});
+
+app.get('/calendar/day', function(req, res){
+
 });
 
 
