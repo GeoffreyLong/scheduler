@@ -2,8 +2,9 @@ extends layout
 
 block content
   - var numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-  - var eventType = ["Single", "Recurring"]
-  table
+  - var eventType = ["Task", "Event", "Recurring Task", "Recurring Event"]
+  - var recurranceInterval = ["Weekly", "Daily"]
+  table(id="eventFormTable")
     tr
       td Event Name
       td
@@ -29,22 +30,36 @@ block content
     //    Daily or weekly to start out
     tr
       td Event Type
-      //td
+      td
         select#eventType
           each value, i in eventType
             option(value=value) #{value}
 
-    tr
+    tr(class="taskToggle")
       td Due Date
       td
         input(id="dueDate", type="text")
 
-    tr 
+    tr(class="taskToggle")
       td Expected Duration
       td 
         input(id="durHours", maxLength='3', size='7', placeholder="hours", type="text")
         input(id="durMins", maxLength='2', size='7', placeholder="minutes", type="text")
 
+    tr(class="eventToggle hide")
+      td Start Time
+      td
+
+    tr(class="eventToggle hide")
+      td End Time
+      td
+
+    tr(class="rToggle hide")
+      td Recurrance Interval
+      //td
+        select#recurranceInterval
+          each value, i in recurranceInterval
+            option(value=value) #{value}
 
     tr
       td 

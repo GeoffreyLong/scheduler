@@ -78,8 +78,14 @@ li.createEvent{
 
 
 /* newEvents */
-
-
+.hide{
+  display: none;
+}
+#eventFormTable td{
+  min-width:150px;
+  /* Min height isn't responding */
+  min-height:90px;
+}
 
 /* showMonth */
 #monthCalendar{
