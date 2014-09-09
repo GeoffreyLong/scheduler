@@ -15,6 +15,7 @@ var EventSchema = new Schema({
     priority: Number,
     dateCreated: Date,
     description: String,
+    dueDate: Date,
 });
 
 var Event = mongoose.model('events', EventSchema);
@@ -49,6 +50,7 @@ app.post('/event/create', function(req,res) {
       priority: req.body.priority,
       dateCreated: req.body.dateCreated,
       description: req.body.description,
+      dueDate: req.body.dueDate,
   }).save(function(err,saved){
     if (err) res.status(500).send(err);
     res.status(200).end();

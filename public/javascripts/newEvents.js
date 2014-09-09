@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  $('#dueDate').datepicker();
   $('.dialog').dialog({
     autoOpen: false,
     dialogClass: "no-close",
@@ -12,6 +13,7 @@ $(document).ready(function(){
     data.priority = $('#priority').find('option:selected').text();
     data.description = $('#description').val();
     data.dateCreated = Date.now();
+    data.dueDate = $('#dueDate').val();
 
     if (data.name != ''){
       $.ajax({
