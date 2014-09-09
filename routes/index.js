@@ -16,6 +16,7 @@ var EventSchema = new Schema({
     dateCreated: Date,
     description: String,
     dueDate: Date,
+    expectedDuration: Number,
 });
 
 var Event = mongoose.model('events', EventSchema);
@@ -51,6 +52,7 @@ app.post('/event/create', function(req,res) {
       dateCreated: req.body.dateCreated,
       description: req.body.description,
       dueDate: req.body.dueDate,
+      expectedDuration: req.body.expectedDuration,
   }).save(function(err,saved){
     if (err) res.status(500).send(err);
     res.status(200).end();

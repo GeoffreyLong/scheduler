@@ -4,6 +4,8 @@ $(document).ready(function(){
     autoOpen: false,
     dialogClass: "no-close",
   });
+
+  
   $('#submit').click(function(e){
     e.preventDefault();
     console.log('submit clicked');
@@ -14,6 +16,7 @@ $(document).ready(function(){
     data.description = $('#description').val();
     data.dateCreated = Date.now();
     data.dueDate = $('#dueDate').val();
+    data.expectedDuration = parseInt($('#durHours').val() * 60 + parseInt($('#durMins').val()));
 
     if (data.name != ''){
       $.ajax({

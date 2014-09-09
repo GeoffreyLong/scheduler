@@ -12,7 +12,6 @@ block content
       td Priority
       td
         select#priority
-          // look to see if I can do i in range
           each value, i in numbers
             if priority == i
               option(value=i, selected) #{i}
@@ -23,6 +22,11 @@ block content
       td 
         textarea(id='description', rows='7', cols='70')
 
+    // Eventtype logic
+    // If "event" then it has a set start and stop point (ie. class)
+    // If "task" then it might have a set duration and a set stop point
+    // If "recurring" then it will occur according to the interval
+    //    Daily or weekly to start out
     tr
       td Event Type
       //td
@@ -30,7 +34,6 @@ block content
           each value, i in eventType
             option(value=value) #{value}
 
-    //Serves as event start time if event
     tr
       td Due Date
       td
@@ -39,6 +42,8 @@ block content
     tr 
       td Expected Duration
       td 
+        input(id="durHours", maxLength='3', size='7', placeholder="hours", type="text")
+        input(id="durMins", maxLength='2', size='7', placeholder="minutes", type="text")
 
 
     tr
