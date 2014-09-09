@@ -15,9 +15,9 @@ block content
         select#priority
           each value, i in numbers
             if priority == i
-              option(value=i, selected) #{i}
+              option(value=value, selected) #{value}
             else
-              option(value=i) #{i}
+              option(value=value) #{value}
     tr
       td Description
       td 
