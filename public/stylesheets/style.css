@@ -1,15 +1,17 @@
 body{
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 a{
   color: #00B7FF;
 }
+
+/* Index */
 .indexLink{
   display: block;
   margin: 10px;
 }
 
+/* Show Events */
 li.createEvent{
   font-weight: bold;
   color: #209900;
@@ -64,7 +66,6 @@ li.createEvent{
 .event.expand .eventButton {
   display: block;
 }
-
 .name{
   font-weight: bold;
 }
@@ -73,4 +74,77 @@ li.createEvent{
 }
 .no-close .ui-dialog-titlebar-close {
   display: none;
+}
+
+
+/* newEvents */
+.hide{
+  display: none;
+}
+#eventFormTable td{
+  min-width:150px;
+  /* Min height isn't responding */
+  min-height:90px;
+}
+.timePicker{
+  border: 0 !important;  /*Removes border*/
+	-webkit-appearance: none;  /*Removes default chrome and safari style*/
+	-moz-appearance: none; /* Removes Default Firefox style*/
+}
+
+
+
+/* showMonth */
+#monthCalendar{
+  position:absolute;
+  left:4.5%;
+  top:5%;
+  height:90%;
+  width:91%;
+  border: 1px solid black;
+}
+#monthCalendar td{
+  border: 1px solid black;
+}
+#monthCalendar tr:first-child{
+  font-weight:bold;
+  background:#123456;
+  color:#FFFFFF;
+  text-align:center;
+  height:5%;
+}
+#monthCalendar .calendarDay{
+  background:#AACCFF;
+  width:13%;
+  text-align:center;
+  vertical-align:middle;
+}
+#monthCalendar .calendarDay:hover{
+  background:#FFFFFF;
+}
+
+/* Show Day */
+.dayCalendarTable{
+  border: 1px solid black;
+  position:absolute;
+  margin-bottom: 50px;
+}
+.dayCalendarTable td{
+  height:20px;
+}
+#dayTimeLabel{
+  left:20%;
+}
+#dayTimeLabel .borderTime{
+  border-top: 1px solid black;
+}
+#dayTimeLabel .timeLabel{
+  width:30px;
+}
+#dayEvents{
+  left:25%;
+}
+/* Hacky workaround to adjust for border heights */
+#dayEvents .hourStart {
+  border-top: 1px solid white;
 }
