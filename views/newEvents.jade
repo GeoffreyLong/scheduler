@@ -2,6 +2,7 @@ extends layout
 
 block content
   - var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+  - var eventType = ["Single", "Recurring"]
   table
     tr
       td Event Name
@@ -17,6 +18,10 @@ block content
               option(value=i, selected) #{i}
             else
               option(value=i) #{i}
+    tr
+      td Description
+      td 
+        textarea(id='description', rows='7', cols='70')
 
     tr
       td 

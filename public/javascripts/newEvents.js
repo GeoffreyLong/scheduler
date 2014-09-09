@@ -10,6 +10,7 @@ $(document).ready(function(){
     var data = {};
     data.name = $('#name').val();
     data.priority = $('#priority').find('option:selected').text();
+    data.description = $('#description').val();
     data.dateCreated = Date.now();
 
     if (data.name != ''){

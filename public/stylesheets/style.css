@@ -4,11 +4,14 @@ body{
 a{
   color: #00B7FF;
 }
+
+/* Index */
 .indexLink{
   display: block;
   margin: 10px;
 }
 
+/* Show Events */
 li.createEvent{
   font-weight: bold;
   color: #209900;
@@ -63,7 +66,6 @@ li.createEvent{
 .event.expand .eventButton {
   display: block;
 }
-
 .name{
   font-weight: bold;
 }
@@ -75,7 +77,11 @@ li.createEvent{
 }
 
 
+/* newEvents */
 
+
+
+/* showMonth */
 #monthCalendar{
   position:absolute;
   left:4.5%;
@@ -104,6 +110,7 @@ li.createEvent{
   background:#FFFFFF;
 }
 
+/* Show Day */
 .dayCalendarTable{
   border: 1px solid black;
   position:absolute;
@@ -117,7 +124,6 @@ li.createEvent{
 }
 #dayTimeLabel .borderTime{
   border-top: 1px solid black;
->>>>>>> temp
 }
 #dayTimeLabel .timeLabel{
   width:30px;
