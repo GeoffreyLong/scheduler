@@ -86,6 +86,13 @@ li.createEvent{
   /* Min height isn't responding */
   min-height:90px;
 }
+.timePicker{
+  border: 0 !important;  /*Removes border*/
+	-webkit-appearance: none;  /*Removes default chrome and safari style*/
+	-moz-appearance: none; /* Removes Default Firefox style*/
+}
+
+
 
 /* showMonth */
 #monthCalendar{

@@ -3,7 +3,10 @@ extends layout
 block content
   - var numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
   - var eventType = ["Task", "Event", "Recurring Task", "Recurring Event"]
+  - var eventTypeVal = ["task", "event", "rTask", "rEvent"]
   - var recurranceInterval = ["Weekly", "Daily"]
+  - var minutes = 60
+  - var hours = 24
   table(id="eventFormTable")
     tr
       td Event Name
@@ -14,7 +17,7 @@ block content
       td
         select#priority
           each value, i in numbers
-            if priority == i
+            if priority == i+1
               option(value=value, selected) #{value}
             else
               option(value=value) #{value}
@@ -33,7 +36,7 @@ block content
       td
         select#eventType
           each value, i in eventType
-            option(value=value) #{value}
+            option(value=eventTypeVal[i]) #{value}
 
     tr(class="taskToggle")
       td Due Date
@@ -49,14 +52,34 @@ block content
     tr(class="eventToggle hide")
       td Start Time
       td
+        input(id="startDate", type="text")
+        span at
+        select(class="timePicker", id="startHour")
+          - for(var i=0; i<hours; i++)
+            option(value=i) #{i}
+        span :
+        select(class="timePicker", id="startMinute")
+          - for(var i=0; i<minutes; i++)
+            option(value=i) #{i}
+
 
     tr(class="eventToggle hide")
       td End Time
       td
+        input(id="endDate", type="text")
+        span at
+        select(class="timePicker", id="endHour")
+          - for(var i=0; i<hours; i++)
+            option(value=i) #{i}
+        span :
+        select(class="timePicker", id="endMinute")
+          - for(var i=0; i<minutes; i++)
+            option(value=i) #{i}
+
 
     tr(class="rToggle hide")
       td Recurrance Interval
-      //td
+      td
         select#recurranceInterval
           each value, i in recurranceInterval
             option(value=value) #{value}

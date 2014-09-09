@@ -11,12 +11,16 @@ mongoose.connect('mongodb://localhost/scheduler', function (error) {
 
 var Schema = mongoose.Schema;
 var EventSchema = new Schema({
+    eventType: String,
     name: String,
     priority: Number,
     dateCreated: Date,
     description: String,
     dueDate: Date,
     expectedDuration: Number,
+    startDate: Date,
+    endDate: Date,
+    recurranceInterval: String,
 });
 
 var Event = mongoose.model('events', EventSchema);
@@ -53,6 +57,9 @@ app.post('/event/create', function(req,res) {
       description: req.body.description,
       dueDate: req.body.dueDate,
       expectedDuration: req.body.expectedDuration,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      recurranceInterval: req.body.recurranceInterval,
   }).save(function(err,saved){
     if (err) res.status(500).send(err);
     res.status(200).end();
