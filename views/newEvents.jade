@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  - var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+  - var numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
   - var eventType = ["Single", "Recurring"]
   table
     tr
@@ -22,6 +22,23 @@ block content
       td Description
       td 
         textarea(id='description', rows='7', cols='70')
+
+    tr
+      td Event Type
+      //td
+        select#eventType
+          each value, i in eventType
+            option(value=value) #{value}
+
+    //Serves as event start time if event
+    tr
+      td Due Date
+      td
+
+    tr 
+      td Expected Duration
+      td 
+
 
     tr
       td 
