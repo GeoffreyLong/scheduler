@@ -6,7 +6,7 @@ block content
       span Add Event
       span.priority +
     for event in events
-      li(class="event", data-id=event['_id'])
+      li(class="event", data-id=event['id'])
         span.name #{event['name']}
         span.priority #{event['priority']}
         span.description.eventHide #{event['description']}

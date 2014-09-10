@@ -24,7 +24,7 @@ $(document).ready(function(){
 
   $('.deleteEvent').click(function(e){
     e.stopPropagation();
-    var event = $(this).parent();
+    var event = $(this).parent().parent();
     var id = event.attr("data-id");
     console.log('Remove clicked, event_id = ' + id);      
     var data = {};
@@ -53,7 +53,7 @@ $(document).ready(function(){
 
   $('.updateEvent').click(function(e){
     e.stopPropagation();
-    var event = $(this).parent();
+    var event = $(this).parent().parent();
     var id = event.attr("data-id");
     console.log('update clicked, event_id = ' + id);      
     window.location.replace("http://localhost:3000/event/update/" + id);

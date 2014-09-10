@@ -75,8 +75,7 @@ app.get('/events/eventForm', function(req,res) {
 // can't delete things willy nilly
 app.post('/event/delete', function(req,res){
   // The req comes in surrounded by quotes... have to watch for this
-  var id = req.body.id.replace(/['"]+/g, '');
-  Event.findByIdAndRemove(id, function(err, removed){
+  Event.findByIdAndRemove(req.params.id, function(err, removed){
     if (err){
       console.log(err);
       res.status(500).send(err);
@@ -86,8 +85,7 @@ app.post('/event/delete', function(req,res){
 });
 
 app.get('/event/update/:id', function(req,res){
-  var id = req.params.id.replace(/['"]+/g, '');
-  Event.findByIdAndRemove(id, function(err, response){
+  Event.findByIdAndRemove(req.params.id, function(err, response){
     if (err){
       console.log(err);
       res.status(500).send(err);
