@@ -24,8 +24,8 @@ var EventSchema = new Schema({
     isComplete: Boolean,
     isRunning: Boolean,
     timeSheet: [{
-      startTime: Date,
-      endTime: Date,
+      startTime: Number,
+      endTime: Number,
     }],
 });
 
@@ -142,8 +142,8 @@ app.get('/events/running', function(req, res){
 
 app.post('/event/action/start', function(req, res){
   Event.findByIdAndUpdate(req.body.id, 
-                          {$push:{"timeSheet":{startTime:Date.now(), 
-                                                endTime:null}}},
+                          {$push:{"timeSheet":{startTime:req.body.time, 
+                                                endTime:-1}}},
                           {safe: true, upsert: true},
                           function(error, response){
     if (error){
@@ -157,8 +157,8 @@ app.post('/event/action/start', function(req, res){
 });
 
 app.post('/event/action/pause', function(req, res){
-  Event.update({'_id':req.body.id,'timeSheet.endTime':null}, 
-                {'$set': {'timeSheet.$.endTime': Date.now()}, 'isRunning':false},
+  Event.update({'_id':req.body.id,'timeSheet.endTime':-1}, 
+                {'$set': {'timeSheet.$.endTime': req.body.time}, 'isRunning':false},
                 function(error, response){
     if (error){
       console.log(error);

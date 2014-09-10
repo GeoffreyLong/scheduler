@@ -62,30 +62,37 @@ $(document).ready(function(){
   $('.startEvent').click(function(e){
     e.stopPropagation();
     var event = $(this).parent().parent();
-    var id = event.attr("data-id");
-    console.log('Starting event, event_id = ' + id);      
-    var data = {};
-    data.id = id;
-    $.ajax({
-      type: 'POST',
-      data: JSON.stringify(data),
-      contentType: 'application/json',
-      url: 'http://localhost:3000/event/action/start',
-      statusCode: {
-        200: function() {
-          event.addClass('running');
-          event.find('.pauseEvent').removeClass('disabledButton');
-          event.find('.startEvent').addClass('disabledButton');
-          event.prepend('<span class="fa fa-bolt"></span>');
-          var li = "<li class='runningEvent' data-id='"
-            + id + "'>" + event.find('.name').text() + "</li>";
-          $('#runningEvents').append(li);
-        },
-        500: function() {
-          alert("Didn't work");
+    if (!event.hasClass('running')){
+      var id = event.attr("data-id");
+      console.log('Starting event, event_id = ' + id);      
+      var data = {};
+      data.id = id;
+
+      // Mongoose or express might be overriding the Date package
+      // At any rate it is not putting back UTC timestamps
+      // So it is easier to pass it back (and possibly better insofar as accuracy)
+      data.time = Date.now();
+      $.ajax({
+        type: 'POST',
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        url: 'http://localhost:3000/event/action/start',
+        statusCode: {
+          200: function() {
+            event.addClass('running');
+            event.find('.pauseEvent').removeClass('disabledButton');
+            event.find('.startEvent').addClass('disabledButton');
+            event.prepend('<span class="fa fa-bolt"></span>');
+            var li = "<li class='runningEvent' data-id='"
+              + id + "'>" + event.find('.name').text() + "</li>";
+            $('#runningEvents').append(li);
+          },
+          500: function() {
+            alert("Didn't work");
+          }
         }
-      }
-    });
+      });
+    }
   });
 
   $('.pauseEvent').click(function(e){
@@ -96,6 +103,11 @@ $(document).ready(function(){
       console.log('Pausing event, event_id = ' + id);      
       var data = {};
       data.id = id;
+
+      // Mongoose or express might be overriding the Date package
+      // At any rate it is not putting back UTC timestamps
+      // So it is easier to pass it back (and possibly better insofar as accuracy)
+      data.time = Date.now();
       $.ajax({
         type: 'POST',
         data: JSON.stringify(data),
