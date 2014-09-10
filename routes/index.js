@@ -157,8 +157,8 @@ app.post('/event/action/start', function(req, res){
 });
 
 app.post('/event/action/pause', function(req, res){
-  Event.update({'_id':req.body.id,'timeSheet.endTime':-1}, 
-                {'$set': {'timeSheet.$.endTime': req.body.time}, 'isRunning':false},
+  Event.update({'_id' : req.body.id,'timeSheet.endTime' : -1}, 
+                {'$set': {'timeSheet.$.endTime': req.body.time}, 'isRunning' : false},
                 function(error, response){
     if (error){
       console.log(error);
@@ -166,8 +166,33 @@ app.post('/event/action/pause', function(req, res){
     }
     res.status(200).end();
   });
-
 });
 
+//Extend to things like tag aggregation
+app.post('/event/metric/timespent', function(req, res){
+  // TODO change this to an aggregate
+  /*
+  Event.aggregate({$match : {_id : req.body.id}},
+                  {total : {$sum : {$cond : {if : {$gte: ["$endTime",1]},
+                                            then: "$endTime" - "$startTime",
+                                            else: 0}}}},
+  */
+  Event.findById(req.body.id, function(error, response){
+      if (error){
+        console.log(error);
+        res.status(500).send(error);
+      }
+      var total = 0;
+
+      response.timeSheet.forEach(function(time){
+        var difference = time.endTime - time.startTime;
+        console.log(difference);
+        total += difference;
+      });
+
+      // returns total time spent in milliseconds
+      res.status(200).send(total);
+    });
+});
 
 module.exports = app;

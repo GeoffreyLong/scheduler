@@ -130,6 +130,25 @@ $(document).ready(function(){
   });
 
   $('.completeEvent').click(function(e){
-
+    e.stopPropagation();
+    var event = $(this).parent().parent();
+    var id = event.attr("data-id");
+    console.log('Sum event, event_id = ' + id);      
+    var data = {};
+    data.id = id;
+    $.ajax({
+      type: 'POST',
+      data: JSON.stringify(data),
+      contentType: 'application/json',
+      url: 'http://localhost:3000/event/metric/timespent',
+      statusCode: {
+        200: function() {
+          alert("lrigt");
+        },
+        500: function() {
+          alert("Didn't work");
+        }
+      }
+    });
   });
 });
