@@ -23,6 +23,7 @@ Some Definitions:
   <li> Task: An event which doesn't have a set start and end time </li>
   <li> Event: has a set start and end time </li>
   <li> Activity: A superset of tasks and events, these are categories like fitness, school, etc where smaller tasks such as Evolutionary Computation assignment one may fall under.  There is no set criteria for these, and it may be dissolved into a basic tag structure. </li>
+  <li> Instance: For activity tracking, this is simply a name and a date created.  An example would be something like "had a cup of coffee" from there you could analyze how that affected your productivity.  I want to apply statistical machine learning at some point to analyze trends, fields such as these could prove useful. </li>
 </ul>
 
 <p>

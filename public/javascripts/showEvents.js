@@ -87,7 +87,7 @@ $(document).ready(function(){
             event.find('.startEvent').addClass('disabledButton');
             event.prepend('<span class="fa fa-bolt"></span>');
             var li = "<li class='runningEvent' data-id='"
-              + id + "'>" + event.find('.name').text() + "</li>";
+              + id + "' data-startTime = " + data.time + ">" + event.find('.name').text() + "</li>";
             $('#runningEvents').append(li);
             $('#runningLabel').removeClass("hide");
           },
