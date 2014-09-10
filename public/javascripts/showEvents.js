@@ -1,11 +1,23 @@
 $(document).ready(function(){
   $('.event').click(function(){
-    $(this).toggleClass("expand");
     console.log($(this).attr("data-id"));
-    curHeight = $(this).height();
-    autoHeight = $(this).css('height', 'auto').height();
-    $(this).height(curHeight).animate({height: autoHeight}, 200);
+
+    var curHeight = $(this).height();
+    if (!$(this).hasClass("expand")){
+      $(this).toggleClass("expand");
+      var autoHeight = $(this).css('height', 'auto').height();
+      $(this).height(curHeight).animate({height: autoHeight}, 200);
+    }
+    else{
+      // This is the height we want it to be eventually
+      endHeight = $(".createEvent").height();
+      $(this).height(curHeight).animate({height: endHeight}, 200, function(){
+        $(this).toggleClass("expand");
+      });
+    }
   });
+
+
   $('.createEvent').click(function(){
     window.location.replace("http://localhost:3000/events/eventForm");    
   });
