@@ -76,6 +76,7 @@ li.event.createEvent{
   font-weight:bold;
 }
 .event{
+  top:0px;
   list-style-type: none;
   border: 1px solid #000000;
   margin: 10px;
@@ -139,22 +140,27 @@ li.event.createEvent{
 .event .metrics{
   position:relative;
   float:right;
+  display:inline-block;
   right:20px;
   top:0px;
 }
-#eventMetrics{
+.eventMetrics{
   display:none;
   width:200px;
   position:absolute;
+  left:370px;
   background:#DDDDBB;
   border-top:1px solid #000000;
   z-index:1;
 }
-#eventMetrics.show{
-  display:block;
+.eventMetrics.show{
+  display:inline-block;
 }
-#eventMetrics td{
+.eventMetrics td{
 
+}
+.eventWrapper{
+  width:600px;
 }
 
 

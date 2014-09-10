@@ -149,19 +149,11 @@ $(document).ready(function(){
   $('.metrics').click(function(e){
     e.stopPropagation();
     var event = $(this).parent();
-    var metrics = $('#eventMetrics');
+    var eventWrapper = event.parent();
+    var metrics = eventWrapper.find('.eventMetrics');
     metrics.toggleClass("show");
 
     if (metrics.hasClass("show")){
-      // All hacky logic...cleanup
-      event.css({
-        "width": event.width()+1,
-      });
-      metrics.css({
-        'top':event.offset().top - 50,
-        'left':event.offset().left + event.width() + 20,
-      });
-
       var id = event.attr("data-id");
       console.log('Sum event, event_id = ' + id);      
       var data = {};
@@ -188,17 +180,11 @@ $(document).ready(function(){
             if (spentString == "") spentString = "Not Started";
 
             metrics.find('#timeSpent').text(spentString);
-            console.log(data.total);
           },
           500: function() {
             alert("Didn't work");
           }
         }
-      });
-    }
-    else{
-      event.css({
-        "width": event.width()-1,
       });
     }
   });
