@@ -112,7 +112,13 @@ li.event.createEvent{
 .eventButtons .disabledButton:hover{
   color:#000000;
 }
-
+.event .fa-bolt{
+  color:#EEAA00;
+  padding-right:5px;
+}
+.event .fa-bolt:hover{
+  color:#000000;
+}
 
 
 /* newEvents */

@@ -7,6 +7,8 @@ block content
       span.priority +
     for event in events
       li(class=(event['isRunning'] == true ? "event running" : "event"), data-id=event['id'])
+        if (event['isRunning'])
+          span(class="fa fa-bolt")
         span.name #{event['name']}
         span.priority #{event['priority']}
         span.description.eventHide #{event['description']}
