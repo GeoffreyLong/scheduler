@@ -30,8 +30,6 @@ var Event = mongoose.model('events', EventSchema);
 var express = require('express');
 var app = express();
 
-var runningTask = null;
-
 var bodyParser = require('body-parser');
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use( bodyParser.urlencoded() ); // to support URL-encoded bodies
@@ -146,10 +144,21 @@ app.post('/event/action/start', function(req, res){
     }
     response.isRunning = true;
     response.save();
-    runningTask = response;
-    console.log(runningTask);
     res.status(200).end();
   });
+});
+
+app.post('/event/action/pause', function(req, res){
+  Event.findById(req.body.id, function(error, response){
+    if (error){
+      console.log(error);
+      res.status(500).send(error);
+    }
+    response.isRunning = false;
+    response.save();
+    res.status(200).end();
+  });
+
 });
 
 

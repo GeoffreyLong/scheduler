@@ -12,8 +12,12 @@ block content
         span.description.eventHide #{event['description']}
         span.eventButtons.eventHide
           span(class="updateEvent fa fa-edit")
-          span(class="startEvent fa fa-play")
-          span(class="pauseEvent fa fa-pause")
+          if (event['isRunning'])
+            span(class="startEvent fa fa-play disabledButton")
+            span(class="pauseEvent fa fa-pause")
+          else
+            span(class="startEvent fa fa-play")
+            span(class="pauseEvent fa fa-pause disabledButton")
           span(class="completeEvent fa fa-check")
           span(class="deleteEvent fa fa-trash")
         //button(class="eventButton eventStart") Start

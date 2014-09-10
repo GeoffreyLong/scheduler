@@ -74,6 +74,8 @@ $(document).ready(function(){
       statusCode: {
         200: function() {
           event.addClass('running');
+          event.find('.pauseEvent').removeClass('disabledButton');
+          event.find('.startEvent').addClass('disabledButton');
           var li = "<li class='runningEvent' data-id='"
             + id + "'>" + event.find('.name').text() + "</li>";
           $('#runningEvents').append(li);
@@ -86,7 +88,31 @@ $(document).ready(function(){
   });
 
   $('.pauseEvent').click(function(e){
-
+    e.stopPropagation();
+    var event = $(this).parent().parent();
+    if (event.hasClass('running')){
+      var id = event.attr("data-id");
+      console.log('Pausing event, event_id = ' + id);      
+      var data = {};
+      data.id = id;
+      $.ajax({
+        type: 'POST',
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        url: 'http://localhost:3000/event/action/pause',
+        statusCode: {
+          200: function() {
+            event.removeClass('running');
+            event.find('.pauseEvent').addClass('disabledButton');
+            event.find('.startEvent').removeClass('disabledButton');
+            $('#runningEvents').find('li[data-id="' + id + '"]').remove();
+          },
+          500: function() {
+            alert("Didn't work");
+          }
+        }
+      });
+    }
   });
 
   $('.completeEvent').click(function(e){

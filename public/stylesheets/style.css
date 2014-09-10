@@ -106,6 +106,13 @@ li.event.createEvent{
   border:1px solid #000000;
   border-bottom:none;
 }
+.eventButtons .disabledButton{
+  background:#AAAAAA;
+}
+.eventButtons .disabledButton:hover{
+  color:#000000;
+}
+
 
 
 /* newEvents */
