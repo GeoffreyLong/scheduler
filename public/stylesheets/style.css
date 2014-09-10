@@ -13,6 +13,8 @@ a{
 .fa:hover{
   color:#00B7FF;
 }
+
+/* TopBar */
 #topBar{
   top:0px;
   width:100%;
@@ -41,6 +43,9 @@ a{
 }
 #topBar .runningEvent{
   list-style-type: none;
+}
+#topBar .topIcon{
+  margin-right:10px;
 }
 #content{
   position:absolute;

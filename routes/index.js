@@ -24,12 +24,16 @@ var EventSchema = new Schema({
     isComplete: Boolean,
     isRunning: Boolean,
     timeSheet: [{
-      startTime: Number,
-      endTime: Number,
+        startTime: Number,
+        endTime: Number,
     }],
 });
+var TagSchema = new Schema({
+    name: String,
+})
 
 var Event = mongoose.model('events', EventSchema);
+var Tags = mongoose.model('tags', TagSchema);
 
 var express = require('express');
 var app = express();
@@ -211,6 +215,26 @@ app.post('/event/metric/timespent', function(req, res){
       // returns total time spent in milliseconds
       res.status(200).send(data);
     });
+});
+
+app.post('/event/tags', function(req, res){
+  Tags.find().exec(function(error, response){
+    if (error){
+      console.log(error);
+      res.status(500).send(error);
+    }
+    res.status(200).send(response);
+  });
+});
+
+app.post('/event/tag/create', function(req, res){
+  console.log(req.body);
+  new Tag({
+    name : req.body.name,
+  }).save(function(err,saved){
+    if (err) res.status(500).send(err);
+    res.status(200).end();
+  });  
 });
 
 module.exports = app;

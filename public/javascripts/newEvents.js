@@ -1,4 +1,56 @@
 $(document).ready(function(){
+  var allTags = [];
+  $.ajax({
+    type: 'POST',
+    contentType: 'application/json',
+    url: 'http://localhost:3000/event/tags',
+    statusCode: {
+      200: function(data) {
+        data.forEach(function(elm){
+          allTags.push(elm);
+        });
+        $("#tags").autocomplete({
+          source: allTags,
+        });
+      },
+      400: function() {
+        alert("Didn't work");
+      }
+    }
+  });
+
+  $("#tags").keypress(function(event) {
+    var tag = $(this).value;
+    
+    if (event.which == 13) {
+    alert(tag);
+      $(this).value = '';
+      console.log(allTags);
+
+      event.preventDefault();
+      $('#addedTags').append('<li>' + tag + '</li>');
+
+      if($.inArray(tag, allTags) == -1){
+        var data = {};
+        data.name = tag;
+        $.ajax({
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify(data),
+          url: 'http://localhost:3000/event/tag/create',
+          statusCode: {
+            200: function(data) {
+              console.log("successful add");
+            },
+            500: function() {
+              alert("Didn't work");
+            }
+          }
+        });
+      }
+    }
+  });
+
   var portToDate = function(oldDate){
     // Hacky workaround because the Date.parse cant seem to parse anything
     var date = oldDate.replace(/['"]+/g, '');
@@ -80,6 +132,7 @@ $(document).ready(function(){
   $('#submit').click(function(e){
     e.preventDefault();
     console.log('submit clicked');
+
     var isValid = true;
 
     var data = {};
