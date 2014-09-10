@@ -136,23 +136,44 @@ $(document).ready(function(){
   $('.metrics').click(function(e){
     e.stopPropagation();
     var event = $(this).parent();
-    var id = event.attr("data-id");
-    console.log('Sum event, event_id = ' + id);      
-    var data = {};
-    data.id = id;
-    $.ajax({
-      type: 'POST',
-      data: JSON.stringify(data),
-      contentType: 'application/json',
-      url: 'http://localhost:3000/event/metric/timespent',
-      statusCode: {
-        200: function(data) {
-          console.log(data.total);
-        },
-        500: function() {
-          alert("Didn't work");
+    var metrics = $('#eventMetrics');
+    metrics.toggleClass("show");
+
+    if (metrics.hasClass("show")){
+      // All hacky logic...cleanup
+      event.css({
+        "width": event.width()+1,
+      });
+      metrics.css({
+        'top':event.offset().top - 50,
+        'left':event.offset().left + event.width() + 20,
+      });
+
+      var id = event.attr("data-id");
+      console.log('Sum event, event_id = ' + id);      
+      var data = {};
+      data.id = id;
+      data.time = Date.now();
+      $.ajax({
+        type: 'POST',
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        url: 'http://localhost:3000/event/metric/timespent',
+        statusCode: {
+          200: function(data) {
+            metrics.find('#timeSpent').text(data.total + " ms");
+            console.log(data.total);
+          },
+          500: function() {
+            alert("Didn't work");
+          }
         }
-      }
-    });
+      });
+    }
+    else{
+      event.css({
+        "width": event.width()-1,
+      });
+    }
   });
 });

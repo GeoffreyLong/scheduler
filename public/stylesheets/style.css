@@ -128,6 +128,20 @@ li.event.createEvent{
   right:20px;
   top:0px;
 }
+#eventMetrics{
+  display:none;
+  width:150px;
+  position:absolute;
+  background:#DDDDBB;
+  border-top:1px solid #000000;
+  z-index:1;
+}
+#eventMetrics.show{
+  display:block;
+}
+#eventMetrics td{
+
+}
 
 
 /* newEvents */

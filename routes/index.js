@@ -186,6 +186,7 @@ app.post('/event/metric/timespent', function(req, res){
 
       if (response.timeSheet){
         response.timeSheet.forEach(function(time){
+          if (time.endTime == -1) time.endTime = req.body.time;
           var difference = time.endTime - time.startTime;
           console.log(difference);
           total += difference;
