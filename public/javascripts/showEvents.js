@@ -2,6 +2,7 @@ $(document).ready(function(){
   $('.event').click(function(){
     console.log($(this).attr("data-id"));
 
+    // Hacky workaround
     var curHeight = $(this).height();
     if (!$(this).hasClass("expand")){
       $(this).toggleClass("expand");
@@ -10,7 +11,9 @@ $(document).ready(function(){
     }
     else{
       // This is the height we want it to be eventually
-      endHeight = $(".createEvent").height();
+      $(this).toggleClass("expand");
+      var endHeight = $(this).css('height', 'auto').height();
+      $(this).toggleClass("expand");
       $(this).height(curHeight).animate({height: endHeight}, 200, function(){
         $(this).toggleClass("expand");
       });
@@ -129,7 +132,7 @@ $(document).ready(function(){
     }
   });
 
-  $('.completeEvent').click(function(e){
+  $('.timeSpent').click(function(e){
     e.stopPropagation();
     var event = $(this).parent().parent();
     var id = event.attr("data-id");

@@ -85,10 +85,13 @@ li.event.createEvent{
   display: block;
 }
 .name{
+  display:inline-block;
   font-weight: bold;
+  width:225px;
 }
 .priority{
   float: right;
+  width:20px;
 }
 .no-close .ui-dialog-titlebar-close {
   display: none;
@@ -118,6 +121,12 @@ li.event.createEvent{
 }
 .event .fa-bolt:hover{
   color:#000000;
+}
+.event .metrics{
+  position:relative;
+  float:right;
+  right:20px;
+  top:0px;
 }
 
 
