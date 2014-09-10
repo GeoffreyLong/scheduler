@@ -9,8 +9,9 @@ block content
       li(class="event", data-id=event['_id'])
         span.name #{event['name']}
         span.priority #{event['priority']}
-        button(class="eventButton updateEvent") Edit
-        button(class="eventButton deleteEvent") Remove
+        span.description.eventHide #{event['description']}
+        button(class="eventButton eventHide updateEvent") Edit
+        button(class="eventButton eventHide deleteEvent") Remove
         //button(class="eventButton eventStart") Start
         //button(class="eventButton eventPause") Pause
         //button(class="eventButton", id="eventCompleted") Completed 

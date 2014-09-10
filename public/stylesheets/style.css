@@ -36,14 +36,20 @@ li.createEvent{
    * Worth noting that fadeout didn't work 
    * when the transition was applied to 'all' instead of 'height'
   */
+  /*
   -webkit-transition: height .5s ease;
   -moz-transition: height .5s ease;
   transition: height .5s ease;
+  */
   overflow: hidden;
+}
+.event .eventHide{
+  display: none;
+}
+.event .description{
 }
 .event .eventButton{
   height: 20px;
-  display: none;
 }
 .eventButton.start{
 
@@ -60,10 +66,7 @@ li.createEvent{
 .eventButton.remove{
 
 }
-.event.expand {
-  height: 100px;
-}
-.event.expand .eventButton {
+.event.expand .eventHide{
   display: block;
 }
 .name{
