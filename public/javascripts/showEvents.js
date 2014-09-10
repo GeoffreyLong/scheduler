@@ -76,6 +76,7 @@ $(document).ready(function(){
           event.addClass('running');
           event.find('.pauseEvent').removeClass('disabledButton');
           event.find('.startEvent').addClass('disabledButton');
+          event.prepend('<span class="fa fa-bolt"></span>');
           var li = "<li class='runningEvent' data-id='"
             + id + "'>" + event.find('.name').text() + "</li>";
           $('#runningEvents').append(li);
@@ -105,6 +106,7 @@ $(document).ready(function(){
             event.removeClass('running');
             event.find('.pauseEvent').addClass('disabledButton');
             event.find('.startEvent').removeClass('disabledButton');
+            event.find('.fa-bolt').remove();
             $('#runningEvents').find('li[data-id="' + id + '"]').remove();
           },
           500: function() {
