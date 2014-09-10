@@ -86,10 +86,15 @@ $(document).ready(function(){
             event.find('.pauseEvent').removeClass('disabledButton');
             event.find('.startEvent').addClass('disabledButton');
             event.prepend('<span class="fa fa-bolt"></span>');
-            var li = "<li class='runningEvent' data-id='"
-              + id + "' data-startTime = " + data.time + ">" + event.find('.name').text() + "</li>";
-            $('#runningEvents').append(li);
             $('#runningLabel').removeClass("hide");
+
+            // Prepopulating this with 0s doesn't fix the timeElapsed bug
+            // It initialized with 0s, then it dissapears and reinitializes
+            var li = "<li class='runningEvent' data-id='"
+              + id + "' data-startTime = " + data.time + ">" + event.find('.name').text() 
+              + "<span style='font-weight:bold'> Time Elapsed: </span>"
+              + "<span class='timeElapsed'>  </span> </li>";
+            $('#runningEvents').append(li);
           },
           500: function() {
             alert("Didn't work");

@@ -46,6 +46,12 @@ a{
 }
 #topBar .runningEvent{
   list-style-type: none;
+  text-align: right;
+}
+#topBar .runningEvent .timeElapsed{
+  display: inline-block;
+  width:80px;
+  text-align:left;
 }
 #topBar .topIcon{
   margin-right:10px;
