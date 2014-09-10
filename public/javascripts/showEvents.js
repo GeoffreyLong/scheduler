@@ -129,7 +129,7 @@ $(document).ready(function(){
               $('#runningLabel').addClass("hide");
             }
             else{
-              $('#runningLabel').addClass("hide");
+              $('#runningLabel').removeClass("hide");
             }            
           },
           500: function() {
