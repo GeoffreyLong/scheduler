@@ -184,14 +184,17 @@ app.post('/event/metric/timespent', function(req, res){
       }
       var total = 0;
 
-      response.timeSheet.forEach(function(time){
-        var difference = time.endTime - time.startTime;
-        console.log(difference);
-        total += difference;
-      });
-
+      if (response.timeSheet){
+        response.timeSheet.forEach(function(time){
+          var difference = time.endTime - time.startTime;
+          console.log(difference);
+          total += difference;
+        });
+      }
+      data = {};
+      data.total = total;
       // returns total time spent in milliseconds
-      res.status(200).send(total);
+      res.status(200).send(data);
     });
 });
 

@@ -132,9 +132,10 @@ $(document).ready(function(){
     }
   });
 
-  $('.timeSpent').click(function(e){
+  // Should add other metrics here
+  $('.metrics').click(function(e){
     e.stopPropagation();
-    var event = $(this).parent().parent();
+    var event = $(this).parent();
     var id = event.attr("data-id");
     console.log('Sum event, event_id = ' + id);      
     var data = {};
@@ -145,8 +146,8 @@ $(document).ready(function(){
       contentType: 'application/json',
       url: 'http://localhost:3000/event/metric/timespent',
       statusCode: {
-        200: function() {
-          alert("lrigt");
+        200: function(data) {
+          console.log(data.total);
         },
         500: function() {
           alert("Didn't work");
