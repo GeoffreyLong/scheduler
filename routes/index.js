@@ -51,6 +51,7 @@ app.get('/event/:id', function(req,res){
 app.post('/event/create', function(req,res) {
   console.log(req.body);
   new Event({
+      eventType: req.body.eventType,
       name: req.body.name, 
       priority: req.body.priority,
       dateCreated: req.body.dateCreated,
@@ -91,9 +92,17 @@ app.get('/event/update/:id', function(req,res){
       console.log(err);
       res.status(500).send(err);
     }
+
     res.render('newEvents', {
+      eventType: response.eventType,
       name: response.name,
       priority: response.priority,
+      description: response.description,
+      dueDate: response.dueDate,
+      expectedDuration: response.expectedDuration,
+      startDate: response.startDate,
+      endDate: response.endDate,
+      recurranceInterval: response.recurranceInterval,
       script: '/javascripts/newEvents.js',
     });
   });

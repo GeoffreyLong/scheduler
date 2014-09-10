@@ -1,16 +1,58 @@
 $(document).ready(function(){
-  $('#dueDate').datepicker();
-  $('#startDate').datepicker();
-  $('#endDate').datepicker();
+  var portToDate = function(oldDate){
+    // Hacky workaround because the Date.parse cant seem to parse anything
+    var date = oldDate.replace(/['"]+/g, '');
+    dateAndTime = date.split('T');
+    
+    var dateTokens = dateAndTime[0].split('-');
+    var timeTokens = dateAndTime[1].split(':');
+
+    return new Date(dateTokens[0], dateTokens[1]-1, dateTokens[2], timeTokens[0], timeTokens[1]);
+  }
+  
+  var dueDate = $('#dueDate').datepicker({
+    dateFormat: "yy-mm-dd",
+  }); 
+  var startDate = $('#startDate').datepicker({
+    dateFormat: "yy-mm-dd",
+  }); 
+  var endDate = $('#endDate').datepicker({
+    dateFormat: "yy-mm-dd",
+  }); 
+
+
+  // Setting of fields if in edit mode
+  if ($('#dueDateTR').attr('data-dueDate')){
+    dueDate.datepicker('setDate', portToDate($('#dueDateTR').attr('data-dueDate')));
+  }
+  if ($('#expectedDurationTR').attr('data-duration')){
+    var duration = parseInt($('#expectedDurationTR').attr('data-duration'));
+    var hours = parseInt(duration / 60);
+    var mins = duration - hours*60;
+    $('#durHours').val(hours);
+    $('#durMins').val(mins);
+  }
+  if ($('#startDateTR').attr('data-startDate')){
+    var date = portToDate($('#startDateTR').attr('data-startDate')); 
+    startDate.datepicker('setDate', date);
+    $('#startHour').val(date.getHours());
+    $('#startMinute').val(date.getMinutes());
+  }
+  if ($('#endDateTR').attr('data-endDate')){
+    var date = portToDate($('#endDateTR').attr('data-endDate'));
+    endDate.datepicker('setDate', date);
+    $('#endHour').val(date.getHours());
+    $('#endMinute').val(date.getMinutes());
+  }
+
   $('.dialog').dialog({
     autoOpen: false,
     dialogClass: "no-close",
   });
 
-  $('#eventType').change(function(){
-    var eventType = $(this).val();
-
+  var toggleType = function(eventType){
     $('.rToggle').addClass("hide");
+
     switch(eventType){
       case "rTask":
         $('.rToggle').removeClass("hide");
@@ -26,7 +68,13 @@ $(document).ready(function(){
         break;
     }
     //$('.eventToggle').toggleClass('hide');
-    
+  }
+
+  toggleType($('#eventType').val());
+
+  $('#eventType').change(function(){
+    var eventType = $(this).val();
+    toggleType(eventType);
   });
   
   $('#submit').click(function(e){
@@ -35,7 +83,7 @@ $(document).ready(function(){
     var isValid = true;
 
     var data = {};
-    data.type = $('#eventType').val();
+    data.eventType = $('#eventType').val();
     data.name = $('#name').val();
     if (data.name == ''){
       alert("Need name");
@@ -44,8 +92,8 @@ $(document).ready(function(){
     data.description = $('#description').val();
     data.dateCreated = Date.now();
 
-    console.log(data.type);
-    switch(data.type){
+    console.log(data.eventType);
+    switch(data.eventType){
       case "rTask":
         data.recurranceInterval = $('#recurranceInterval').val();
       case "task":
