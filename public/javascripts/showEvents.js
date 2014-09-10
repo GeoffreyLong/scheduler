@@ -176,4 +176,31 @@ $(document).ready(function(){
       });
     }
   });
+
+  $('.completeEvent').click(function(e){
+    e.stopPropagation();
+    var event = $(this).parent().parent();
+    data = {};
+    data.id = event.attr("data-id");
+    data.time = Date.now();
+    console.log('Complete event, event_id = ' + data.id);      
+    $.ajax({
+      type: 'POST',
+      data: JSON.stringify(data),
+      contentType: 'application/json',
+      url: 'http://localhost:3000/event/action/complete',
+      statusCode: {
+        200: function() {
+          console.log("Successful completion");
+          event.removeClass("expand");
+          event.fadeOut(1000, function(){ 
+            $(this).remove();
+          });
+        },
+        500: function() {
+          alert("Didn't work");
+        }
+      }
+    });
+  });
 });

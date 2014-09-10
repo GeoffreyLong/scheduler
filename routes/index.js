@@ -168,6 +168,20 @@ app.post('/event/action/pause', function(req, res){
   });
 });
 
+app.post('/event/action/complete', function(req, res){
+  Event.update({'_id' : req.body.id,'timeSheet.endTime' : -1}, 
+                {'$set': {'timeSheet.$.endTime': req.body.time}, 
+                  'isRunning' : false,
+                  'isComplete' : true},
+                function(error, response){
+    if (error){
+      console.log(error);
+      res.status(500).send(error);
+    }
+    res.status(200).end();
+  });
+});
+
 //Extend to things like tag aggregation
 app.post('/event/metric/timespent', function(req, res){
   // TODO change this to an aggregate
