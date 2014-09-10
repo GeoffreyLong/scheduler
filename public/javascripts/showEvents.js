@@ -32,26 +32,29 @@ $(document).ready(function(){
     console.log('Remove clicked, event_id = ' + id);      
     var data = {};
     data.id = id;
-    $.ajax({
-      type: 'POST',
-      data: JSON.stringify(data),
-      contentType: 'application/json',
-      url: 'http://localhost:3000/event/delete',
-      statusCode: {
-        200: function() {
-          /*alert("Successfully added").delay(1000).fadeOut(function() {
+
+    if (window.confirm("Delete this event?")){
+      $.ajax({
+        type: 'POST',
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        url: 'http://localhost:3000/event/delete',
+        statusCode: {
+          200: function() {
+            /*alert("Successfully added").delay(1000).fadeOut(function() {
+                $(this).remove();
+            }); */         
+            event.removeClass("expand");
+            event.fadeOut(1000, function(){ 
               $(this).remove();
-          }); */         
-          event.removeClass("expand");
-          event.fadeOut(1000, function(){ 
-            $(this).remove();
-          });
-        },
-        500: function() {
-          alert("Didn't work");
+            });
+          },
+          500: function() {
+            alert("Didn't work");
+          }
         }
-      }
-    });
+      });
+    }
   });
 
   $('.updateEvent').click(function(e){
