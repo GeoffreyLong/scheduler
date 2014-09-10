@@ -44,7 +44,7 @@ $(document).ready(function(){
             $(this).remove();
           });
         },
-        400: function() {
+        500: function() {
           alert("Didn't work");
         }
       }
@@ -57,5 +57,39 @@ $(document).ready(function(){
     var id = event.attr("data-id");
     console.log('update clicked, event_id = ' + id);      
     window.location.replace("http://localhost:3000/event/update/" + id);
+  });
+
+  $('.startEvent').click(function(e){
+    e.stopPropagation();
+    var event = $(this).parent().parent();
+    var id = event.attr("data-id");
+    console.log('Starting event, event_id = ' + id);      
+    var data = {};
+    data.id = id;
+    $.ajax({
+      type: 'POST',
+      data: JSON.stringify(data),
+      contentType: 'application/json',
+      url: 'http://localhost:3000/event/action/start',
+      statusCode: {
+        200: function() {
+          event.addClass('running');
+          var li = "<li class='runningEvent' data-id='"
+            + id + "'>" + event.find('.name').text() + "</li>";
+          $('#runningEvents').append(li);
+        },
+        500: function() {
+          alert("Didn't work");
+        }
+      }
+    });
+  });
+
+  $('.pauseEvent').click(function(e){
+
+  });
+
+  $('.completeEvent').click(function(e){
+
   });
 });

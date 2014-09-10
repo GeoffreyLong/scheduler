@@ -14,13 +14,33 @@ a{
   color:#00B7FF;
 }
 #topBar{
-  padding:5px;
   top:0px;
   width:100%;
   position:fixed;
   background:#FFFFFF;
   height:50px;
   z-index:1000;
+}
+#topBar .fa{
+  padding:5px;
+}
+#topBar #runningLabel{
+  font-weight:bold;
+  position: relative;
+  top:0px;
+  float:right;
+}
+#topBar #runningEvents{
+  padding:0;
+  margin:0;
+  margin-left:5px;
+  position:relative;
+  top:0px;
+  float:right;
+  margin-right:50px;
+}
+#topBar .runningEvent{
+  list-style-type: none;
 }
 #content{
   position:absolute;

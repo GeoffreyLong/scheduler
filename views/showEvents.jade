@@ -6,12 +6,15 @@ block content
       span Add Event
       span.priority +
     for event in events
-      li(class="event", data-id=event['id'])
+      li(class=(event['isRunning'] == true ? "event running" : "event"), data-id=event['id'])
         span.name #{event['name']}
         span.priority #{event['priority']}
         span.description.eventHide #{event['description']}
         span.eventButtons.eventHide
           span(class="updateEvent fa fa-edit")
+          span(class="startEvent fa fa-play")
+          span(class="pauseEvent fa fa-pause")
+          span(class="completeEvent fa fa-check")
           span(class="deleteEvent fa fa-trash")
         //button(class="eventButton eventStart") Start
         //button(class="eventButton eventPause") Pause

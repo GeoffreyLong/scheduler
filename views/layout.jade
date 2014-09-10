@@ -7,9 +7,12 @@ html
     link(rel="stylesheet", href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js")
     script(src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js")
-    script(type='text/javascript', src= script)
+    script(type='text/javascript', src="/javascripts/layout.js")
+    script(type='text/javascript', src=script)
   body
     div(id="topBar")
       a(href="/" class="fa fa-home fa-3x topIcon")
+      ul(id="runningEvents")
+      span(id="runningLabel") Running Events:
     div(id="content")
       block content
