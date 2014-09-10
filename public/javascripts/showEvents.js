@@ -191,6 +191,7 @@ $(document).ready(function(){
       url: 'http://localhost:3000/event/action/complete',
       statusCode: {
         200: function() {
+          $('#runningEvents').find('li[data-id="' + data.id + '"]').remove();
           console.log("Successful completion");
           event.removeClass("expand");
           event.fadeOut(1000, function(){ 
