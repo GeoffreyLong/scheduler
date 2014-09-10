@@ -131,6 +131,7 @@ $(document).ready(function(){
         statusCode: {
           200: function() {
             $('#success').dialog('open').delay(1000).fadeOut(1000, function(){
+              $('#success').dialog('close');
               window.location.replace("http://localhost:3000/events/show");
             });
           },

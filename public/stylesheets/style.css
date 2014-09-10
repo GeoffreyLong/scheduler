@@ -89,6 +89,9 @@ li.event.createEvent{
 
 
 /* newEvents */
+#eventFormTable{
+  padding:20px;
+}
 .hide{
   display: none;
 }
