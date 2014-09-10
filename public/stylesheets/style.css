@@ -1,8 +1,33 @@
 body{
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding:0;
+  margin:0;
 }
 a{
   color: #00B7FF;
+}
+
+.fa{
+  color:#000000;
+}
+.fa:hover{
+  color:#00B7FF;
+}
+#topBar{
+  padding:5px;
+  top:0px;
+  width:100%;
+  position:fixed;
+  background:#FFFFFF;
+  height:7%;
+  z-index:1000;
+}
+#content{
+  position:absolute;
+  top:8%;
+}
+#indexContent{
+  padding-left:70px;
 }
 
 /* Index */
@@ -12,25 +37,15 @@ a{
 }
 
 /* Show Events */
-li.createEvent{
-  font-weight: bold;
+li.event.createEvent{
   color: #209900;
-  list-style-type: none;
-  border: 1px solid #000000;
-  margin: 10px;
-  padding: 10px;
-  height: 20px;
-  width: 300px;
-}
-.li.plusSign{
-  float:right;
+  font-weight:bold;
 }
 .event{
   list-style-type: none;
   border: 1px solid #000000;
   margin: 10px;
   padding: 10px;
-  height: 20px;
   width: 300px;
   /* 
    * Worth noting that fadeout didn't work 
@@ -46,26 +61,6 @@ li.createEvent{
 .event .eventHide{
   display: none;
 }
-.event .description{
-}
-.event .eventButton{
-  height: 20px;
-}
-.eventButton.start{
-
-}
-.eventButton.stop{
-
-}
-.eventButton.pause{
-
-}
-.eventButton.edit{
-
-}
-.eventButton.remove{
-
-}
 .event.expand .eventHide{
   display: block;
 }
@@ -77,6 +72,19 @@ li.createEvent{
 }
 .no-close .ui-dialog-titlebar-close {
   display: none;
+}
+.eventButtons{
+  margin-bottom: -10px;
+  text-align:center;
+}
+.eventButtons .fa{
+  margin-top:15px;
+  background:#E0E0E0;
+  padding:3px;
+  padding-left:20px;
+  padding-right:20px;
+  border:1px solid #000000;
+  border-bottom:none;
 }
 
 

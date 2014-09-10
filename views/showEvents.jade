@@ -2,7 +2,7 @@ extends layout
 
 block content
   ul
-    li(class="createEvent") 
+    li(class="event createEvent") 
       span Add Event
       span.priority +
     for event in events
@@ -10,8 +10,9 @@ block content
         span.name #{event['name']}
         span.priority #{event['priority']}
         span.description.eventHide #{event['description']}
-        button(class="eventButton eventHide updateEvent") Edit
-        button(class="eventButton eventHide deleteEvent") Remove
+        span.eventButtons.eventHide
+          span(class="updateEvent fa fa-edit")
+          span(class="deleteEvent fa fa-trash")
         //button(class="eventButton eventStart") Start
         //button(class="eventButton eventPause") Pause
         //button(class="eventButton", id="eventCompleted") Completed 
