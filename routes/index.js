@@ -23,6 +23,10 @@ var EventSchema = new Schema({
     recurranceInterval: String,
     isComplete: Boolean,
     isRunning: Boolean,
+    timeSheet: [{
+      startTime: Date,
+      endTime: Date,
+    }],
 });
 
 var Event = mongoose.model('events', EventSchema);
@@ -137,7 +141,11 @@ app.get('/events/running', function(req, res){
 });
 
 app.post('/event/action/start', function(req, res){
-  Event.findById(req.body.id, function(error, response){
+  Event.findByIdAndUpdate(req.body.id, 
+                          {$push:{"timeSheet":{startTime:Date.now(), 
+                                                endTime:null}}},
+                          {safe: true, upsert: true},
+                          function(error, response){
     if (error){
       console.log(error);
       res.status(500).send(error);
@@ -149,13 +157,13 @@ app.post('/event/action/start', function(req, res){
 });
 
 app.post('/event/action/pause', function(req, res){
-  Event.findById(req.body.id, function(error, response){
+  Event.update({'_id':req.body.id,'timeSheet.endTime':null}, 
+                {'$set': {'timeSheet.$.endTime': Date.now()}, 'isRunning':false},
+                function(error, response){
     if (error){
       console.log(error);
       res.status(500).send(error);
     }
-    response.isRunning = false;
-    response.save();
     res.status(200).end();
   });
 
