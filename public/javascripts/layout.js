@@ -10,6 +10,12 @@ $(document).ready(function(){
             + elm._id + "'>" + elm.name + "</li>";
           ul.append(li);
         });
+        if (ul.find("li").length == 0){
+          $('#runningLabel').addClass("hide");
+        }
+        else{
+          $('#runningLabel').removeClass("hide");
+        }
       },
       500: function(error) {
         alert(error);

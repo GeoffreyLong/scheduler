@@ -13,6 +13,9 @@ a{
 .fa:hover{
   color:#00B7FF;
 }
+.hide{
+  display:none;
+}
 
 /* TopBar */
 #topBar{

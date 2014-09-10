@@ -89,6 +89,7 @@ $(document).ready(function(){
             var li = "<li class='runningEvent' data-id='"
               + id + "'>" + event.find('.name').text() + "</li>";
             $('#runningEvents').append(li);
+            $('#runningLabel').removeClass("hide");
           },
           500: function() {
             alert("Didn't work");
@@ -122,7 +123,14 @@ $(document).ready(function(){
             event.find('.pauseEvent').addClass('disabledButton');
             event.find('.startEvent').removeClass('disabledButton');
             event.find('.fa-bolt').remove();
-            $('#runningEvents').find('li[data-id="' + id + '"]').remove();
+            var ul = $('#runningEvents');
+            ul.find('li[data-id="' + id + '"]').remove();
+            if (ul.find("li").length == 0){
+              $('#runningLabel').addClass("hide");
+            }
+            else{
+              $('#runningLabel').addClass("hide");
+            }            
           },
           500: function() {
             alert("Didn't work");
