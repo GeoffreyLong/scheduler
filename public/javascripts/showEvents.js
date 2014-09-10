@@ -169,7 +169,20 @@ $(document).ready(function(){
         url: 'http://localhost:3000/event/metric/timespent',
         statusCode: {
           200: function(data) {
-            metrics.find('#timeSpent').text(data.total + " ms");
+            var ms = data.total;
+            var secs = parseInt(ms / 1000) % 60;
+            var mins = parseInt(ms / (60 * 1000)) % 60;
+            var hours = parseInt(ms / (60 * 60 * 1000));
+
+            var spentString = "";
+
+            if (hours != 0) spentString += hours + "h";
+            if (mins != 0) spentString += mins + "m";
+            if (secs != 0) spentString += secs + "s";
+
+            if (spentString == "") spentString = "Not Started";
+
+            metrics.find('#timeSpent').text(spentString);
             console.log(data.total);
           },
           500: function() {
