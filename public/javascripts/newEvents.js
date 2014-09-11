@@ -4,13 +4,12 @@ $(document).ready(function(){
     type: 'POST',
     contentType: 'application/json',
     url: 'http://localhost:3000/event/tags',
+    async: false,
     statusCode: {
       200: function(data) {
+        console.log(data);
         data.forEach(function(elm){
-          allTags.push(elm);
-        });
-        $("#tags").autocomplete({
-          source: allTags,
+          allTags.push(elm.name);
         });
       },
       400: function() {
@@ -19,20 +18,27 @@ $(document).ready(function(){
     }
   });
 
-  $("#tags").keypress(function(event) {
-    var tag = $(this).value;
-    
-    if (event.which == 13) {
-    alert(tag);
-      $(this).value = '';
-      console.log(allTags);
+  $("#tags").autocomplete({
+      source: function (request, response) {
+          var result = $.ui.autocomplete.filter(allTags, request.term);
+          response(result);
+      }
+  });
+  
 
+  $("#tags").keypress(function(event) {
+    // For the record $(this).val() is getting the event... need to watch for that
+    //var tag = $(this).value;
+    if (event.which == 13) {
       event.preventDefault();
-      $('#addedTags').append('<li>' + tag + '</li>');
+      var tag = $("#tags").val();
+      $('#tags').val('');
 
       if($.inArray(tag, allTags) == -1){
         var data = {};
         data.name = tag;
+        console.log(allTags);
+        console.log(tag);
         $.ajax({
           type: 'POST',
           contentType: 'application/json',
@@ -40,6 +46,8 @@ $(document).ready(function(){
           url: 'http://localhost:3000/event/tag/create',
           statusCode: {
             200: function(data) {
+              allTags.push(tag);
+              $('#addedTags').append('<li>' + tag + '</li>');
               console.log("successful add");
             },
             500: function() {
@@ -47,6 +55,9 @@ $(document).ready(function(){
             }
           }
         });
+      }
+      else{
+        $('#addedTags').append('<li>' + tag + '</li>');
       }
     }
   });

@@ -33,7 +33,7 @@ var TagSchema = new Schema({
 })
 
 var Event = mongoose.model('events', EventSchema);
-var Tags = mongoose.model('tags', TagSchema);
+var Tag = mongoose.model('tags', TagSchema);
 
 var express = require('express');
 var app = express();
@@ -218,7 +218,7 @@ app.post('/event/metric/timespent', function(req, res){
 });
 
 app.post('/event/tags', function(req, res){
-  Tags.find().exec(function(error, response){
+  Tag.find().exec(function(error, response){
     if (error){
       console.log(error);
       res.status(500).send(error);

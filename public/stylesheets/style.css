@@ -181,6 +181,20 @@ li.event.createEvent{
 	-webkit-appearance: none;  /*Removes default chrome and safari style*/
 	-moz-appearance: none; /* Removes Default Firefox style*/
 }
+#addTags td:first-child{
+  position:relative;
+  top: 5px;
+  vertical-align:top;
+}
+#addTags ul{
+  margin:0px;
+  margin-left: -40px;
+}
+#addTags li{
+  list-style-type:none;
+  margin:0;
+}
+
 
 
 
