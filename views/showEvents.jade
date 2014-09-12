@@ -1,6 +1,12 @@
 extends layout
 
 block content
+  a(href="#" class="fa fa-tags fa-3x sideIcon")
+  div(class="search" id="nameSearch")
+    input(placeholder="Search by Name")
+  a(href="#" class="fa fa-search fa-3x sideIcon")
+  div(class="search" id="tagSearch")
+    input(placeholder="Search by Tags")
   ul
     li(class="event createEvent") 
       span Add Event

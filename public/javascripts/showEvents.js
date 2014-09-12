@@ -219,4 +219,36 @@ $(document).ready(function(){
       }
     });
   });
+
+  $('.fa-search').click(function(e){
+    $(this).toggleClass("clicked");
+    $('#nameSearch').toggleClass("show");
+    $('#nameSearch input').focus();
+  });
+  $('.fa-tags').click(function(e){
+    $(this).toggleClass("clicked");
+    $('#tagSearch').toggleClass("show");
+    $('#tagSearch input').focus();
+  });
+
+  $('#nameSearch').keypress(function(event) {
+    $('.event').each(function(index, value){
+      if (!$(this).hasClass('createEvent')){
+        var eventName = $(this).find('.name').text().toLowerCase();
+        var searchedName = $('#nameSearch input').val().toLowerCase();
+        // Remember that indexOf without the != will pass all basically
+        if(eventName.indexOf(searchedName) == -1){
+          $(this).addClass('hide');
+        }
+        else{
+          $(this).removeClass('hide');
+        }
+      }
+    });
+    if(event.which == 13){
+      $('#nameSearch input').val('');
+      $('.fa-search').toggleClass("clicked");
+      $('#nameSearch').toggleClass("show");
+    }
+  });
 });
