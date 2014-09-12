@@ -2,8 +2,8 @@ extends layout
 
 block content
   - var numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-  - var eventTypes = ["Task", "Event", "Recurring Task", "Recurring Event"]
-  - var eventTypeVals = ["task", "event", "rTask", "rEvent"]
+  - var eventTypes = ["Task", "Event", "Recurring Task", "Recurring Event", "Activity"]
+  - var eventTypeVals = ["task", "event", "rTask", "rEvent", "activity"]
   - var recurranceIntervals = ["Weekly", "Daily"]
   - var minutes = 60
   - var hours = 24
@@ -12,7 +12,7 @@ block content
       td Event Name
       td
         input(type="text", placeholder="Event name", value=name)#name
-    tr
+    tr(class="activityToggle")
       td Priority
       td
         select#priority
@@ -96,7 +96,7 @@ block content
             else
               option(value=value) #{value}
 
-    tr(id="addTags")
+    tr(id="addTags" class="activityToggle")
       td Tags
       td
         input(id="tags", type="text")

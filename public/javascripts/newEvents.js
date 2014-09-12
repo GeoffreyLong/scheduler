@@ -122,12 +122,19 @@ $(document).ready(function(){
       case "task":
         $('.taskToggle').removeClass("hide");
         $('.eventToggle').addClass("hide");
+        $('.activityToggle').removeClass("hide");
         break;
       case "rEvent":
         $('.rToggle').removeClass("hide");
       case "event":
         $('.eventToggle').removeClass("hide");
         $('.taskToggle').addClass("hide");
+        $('.activityToggle').removeClass("hide");
+        break;
+      case "activity":
+        $('.taskToggle').addClass("hide");
+        $('.eventToggle').addClass("hide");
+        $('.activityToggle').addClass("hide");
         break;
     }
     //$('.eventToggle').toggleClass('hide');
@@ -183,6 +190,9 @@ $(document).ready(function(){
           isValid = false;
           alert("End Date cannot be before Start Date");
         }
+        break;
+      case "activity":
+        data.priority = 0;
         break;
     }
 
