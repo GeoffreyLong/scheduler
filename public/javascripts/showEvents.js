@@ -1,7 +1,5 @@
 $(document).ready(function(){
   $('.event').click(function(){
-    console.log($(this).attr("data-id"));
-
     // Hacky workaround
     var curHeight = $(this).height();
     if (!$(this).hasClass("expand")){
@@ -230,6 +228,22 @@ $(document).ready(function(){
     $('#tagSearch').toggleClass("show");
     $('#tagSearch input').focus();
   });
+  // TODO All of this logic should be cleaned up
+  $('.sideIcon.fa-bolt').click(function(e){
+    $(this).toggleClass("clicked");
+    if($(this).hasClass("clicked")){
+      $('.event').each(function(index, value){
+        if (!($(this).hasClass("running") || $(this).hasClass("createEvent"))){
+          $(this).addClass('hide');
+        }
+      });
+    }
+    else{
+      $('.event').each(function(index, value){
+          $(this).removeClass('hide');
+      });
+    }
+  });
 
   $('#nameSearch').keypress(function(event) {
     $('.event').each(function(index, value){
@@ -237,11 +251,21 @@ $(document).ready(function(){
         var eventName = $(this).find('.name').text().toLowerCase();
         var searchedName = $('#nameSearch input').val().toLowerCase();
         // Remember that indexOf without the != will pass all basically
-        if(eventName.indexOf(searchedName) == -1){
-          $(this).addClass('hide');
+        if ($('.fa-bolt').hasClass("clicked")){
+          if(eventName.indexOf(searchedName) == -1){
+            $(this).addClass('hide');
+          }
+          else{
+            if ($(this).hasClass('running')) $(this).removeClass('hide');
+          }
         }
         else{
-          $(this).removeClass('hide');
+          if(eventName.indexOf(searchedName) == -1){
+            $(this).addClass('hide');
+          }
+          else{
+            $(this).removeClass('hide');
+          }
         }
       }
     });

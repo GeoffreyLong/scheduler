@@ -82,6 +82,10 @@ a{
 .sideIcon.fa-tags{
   top:100px;
 }
+.sideIcon.fa-bolt{
+  top:150px;
+  margin-left:10px;
+}
 .search{
   margin-left:5px;
   position:fixed;
@@ -109,7 +113,7 @@ a{
 .search.show input{
   display:inline-block;
 }
-.fa-search.clicked{
+.sideIcon.clicked{
   color:#00B7FF;
 }
 .search#tagSearch{
