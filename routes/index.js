@@ -172,11 +172,21 @@ app.post('/event/action/pause', function(req, res){
   });
 });
 
+
+// See if I can do this in one query
 app.post('/event/action/complete', function(req, res){
   Event.update({'_id' : req.body.id,'timeSheet.endTime' : -1}, 
                 {'$set': {'timeSheet.$.endTime': req.body.time}, 
-                  'isRunning' : false,
-                  'isComplete' : true},
+                  'isRunning' : false},
+                function(error, response){
+    if (error){
+      console.log(error);
+      res.status(500).send(error);
+    }
+  });
+  Event.findByIdAndUpdate(req.body.id,
+                  {'$set': {'isRunning' : false,
+                  'isComplete' : true}},
                 function(error, response){
     if (error){
       console.log(error);
