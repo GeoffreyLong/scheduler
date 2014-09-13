@@ -18,6 +18,23 @@ $(document).ready(function(){
     }
   });
 
+  var allTags = [];
+  $.ajax({
+    type: 'POST',
+    contentType: 'application/json',
+    url: 'http://localhost:3000/event/tags',
+    statusCode: {
+      200: function(data) {
+        console.log(data);
+        data.forEach(function(elm){
+          allTags.push(elm.name);
+        });
+      },
+      400: function() {
+        alert("Didn't work");
+      }
+    }
+  });
 
   $('.createEvent').click(function(){
     window.location.replace("http://localhost:3000/events/eventForm");    
@@ -273,6 +290,37 @@ $(document).ready(function(){
       $('#nameSearch input').val('');
       $('.fa-search').toggleClass("clicked");
       $('#nameSearch').toggleClass("show");
+    }
+  });
+
+  $('#tagSearch').keypress(function(event) {
+    $('.event').each(function(index, value){
+      if (!$(this).hasClass('createEvent')){
+        var eventName = $(this).find('.tagSpan').text().toLowerCase();
+        var searchedName = $('#tagSearch input').val().toLowerCase();
+        // Remember that indexOf without the != will pass all basically
+        if ($('.fa-bolt').hasClass("clicked")){
+          if(eventName.indexOf(searchedName) == -1){
+            $(this).addClass('hide');
+          }
+          else{
+            if ($(this).hasClass('running')) $(this).removeClass('hide');
+          }
+        }
+        else{
+          if(eventName.indexOf(searchedName) == -1){
+            $(this).addClass('hide');
+          }
+          else{
+            $(this).removeClass('hide');
+          }
+        }
+      }
+    });
+    if(event.which == 13){
+      $('#tagSearch input').val('');
+      $('.fa-tags').toggleClass("clicked");
+      $('#tagSearch').toggleClass("show");
     }
   });
 });
