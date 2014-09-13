@@ -19,48 +19,53 @@ $(document).ready(function(){
   });
 
   $("#tags").autocomplete({
-      source: function (request, response) {
-          var result = $.ui.autocomplete.filter(allTags, request.term);
-          response(result);
-      }
+    source: function (request, response) {
+        var result = $.ui.autocomplete.filter(allTags, request.term);
+        response(result);
+    },
+    minLength: 0,
   });
-  
 
   $("#tags").keypress(function(event) {
     // For the record $(this).val() is getting the event... need to watch for that
     //var tag = $(this).value;
     if (event.which == 13) {
       event.preventDefault();
-      var tag = $("#tags").val();
-      $('#tags').val('');
-
-      if($.inArray(tag, allTags) == -1){
-        var data = {};
-        data.name = tag;
-        console.log(allTags);
-        console.log(tag);
-        $.ajax({
-          type: 'POST',
-          contentType: 'application/json',
-          data: JSON.stringify(data),
-          url: 'http://localhost:3000/event/tag/create',
-          statusCode: {
-            200: function(data) {
-              allTags.push(tag);
-              $('#addedTags').append('<li>' + tag + '</li>');
-              console.log("successful add");
-            },
-            500: function() {
-              alert("Didn't work");
-            }
-          }
-        });
-      }
-      else{
-        $('#addedTags').append('<li>' + tag + '</li>');
-      }
+      addTag();
     }
   });
+
+  var addTag = function(){
+    var tag = $("#tags").val();
+    $('#tags').val('');
+
+    if($.inArray(tag, allTags) == -1){
+      var data = {};
+      data.name = tag;
+      console.log(allTags);
+      console.log(tag);
+      $.ajax({
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        url: 'http://localhost:3000/event/tag/create',
+        async: false,
+        statusCode: {
+          200: function(data) {
+            allTags.push(tag);
+            $('#addedTags').append('<li>' + tag + '</li>');
+            console.log("successful add");
+          },
+          500: function() {
+            alert("Didn't work");
+          }
+        }
+      });
+    }
+    else{
+      $('#addedTags').append('<li>' + tag + '</li>');
+    }
+  };
 
   var portToDate = function(oldDate){
     // Hacky workaround because the Date.parse cant seem to parse anything
@@ -151,6 +156,7 @@ $(document).ready(function(){
     e.preventDefault();
     console.log('submit clicked');
 
+    addTag();
     var isValid = true;
 
     var data = {};
@@ -195,6 +201,14 @@ $(document).ready(function(){
         data.priority = 0;
         break;
     }
+
+    var tags = [];
+    $('#addedTags').find('li').each(function(){
+      var tag = $(this).text();
+      if (tag != '') tags.push(tag);
+    });
+
+    data.tags = tags;
 
     if (data.name != '' && isValid){
       $.ajax({

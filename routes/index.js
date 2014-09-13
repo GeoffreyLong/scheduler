@@ -27,6 +27,7 @@ var EventSchema = new Schema({
         startTime: Number,
         endTime: Number,
     }],
+    tags: [String],
 });
 var TagSchema = new Schema({
     name: String,
@@ -66,6 +67,7 @@ app.post('/event/create', function(req,res) {
       recurranceInterval: req.body.recurranceInterval,
       isComplete: false,
       isRunning: false,
+      tags: req.body.tags,
   }).save(function(err,saved){
     if (err) res.status(500).send(err);
     res.status(200).end();
@@ -108,6 +110,7 @@ app.get('/event/update/:id', function(req,res){
       recurranceInterval: response.recurranceInterval,
       isComplete: response.isComplete,
       isRunning: response.isRunning,
+      tags: response.tags,
       script: '/javascripts/newEvents.js',
     });
   });
