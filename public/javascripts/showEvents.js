@@ -83,7 +83,7 @@ $(document).ready(function(){
         }
       });
     });
-  }
+  };
 
 
   $('.deleteEvent').click(function(e){
@@ -105,6 +105,14 @@ $(document).ready(function(){
             /*alert("Successfully added").delay(1000).fadeOut(function() {
                 $(this).remove();
             }); */         
+            var ul = $('#runningEvents');
+            ul.find('li[data-id="' + id + '"]').remove();
+            if (ul.find("li").length == 0){
+              $('#runningLabel').addClass("hide");
+            }
+            else{
+              $('#runningLabel').removeClass("hide");
+            }            
             event.removeClass("expand");
             event.fadeOut(1000, function(){ 
               $(this).remove();
@@ -268,6 +276,12 @@ $(document).ready(function(){
       statusCode: {
         200: function() {
           $('#runningEvents').find('li[data-id="' + data.id + '"]').remove();
+          if ($('#runningEvents').find("li").length == 0){
+            $('#runningLabel').addClass("hide");
+          }
+          else{
+            $('#runningLabel').removeClass("hide");
+          }            
           console.log("Successful completion");
           event.removeClass("expand");
           event.fadeOut(1000, function(){ 
