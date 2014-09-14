@@ -12,15 +12,10 @@ block content
       td Event Name
       td
         input(type="text", placeholder="Event name", value=name)#name
-    tr(class="activityToggle")
-      td Priority
+    tr(id="addTags")
+      td Tags
       td
-        select#priority
-          each value, i in numbers
-            if priority == i+1
-              option(value=value, selected) #{value}
-            else
-              option(value=value) #{value}
+        input(id="tags", type="text")
     tr
       td Description
       td 
@@ -41,6 +36,15 @@ block content
             else
               option(value=eventTypeVals[i]) #{value}
 
+    tr(class="activityToggle")
+      td Priority
+      td
+        select#priority
+          each value, i in numbers
+            if priority == i+1
+              option(value=value, selected) #{value}
+            else
+              option(value=value) #{value}
     tr(class="taskToggle" id="dueDateTR" data-dueDate=dueDate)
       td Due Date
       td
@@ -95,12 +99,6 @@ block content
               option(value=value, selected) #{value}
             else
               option(value=value) #{value}
-
-    tr(id="addTags")
-      td Tags
-      td
-        input(id="tags", type="text")
-        ul(id="addedTags")
 
     tr
       td 

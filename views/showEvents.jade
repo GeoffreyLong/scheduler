@@ -27,11 +27,8 @@ block content
             span(class="metrics fa fa-line-chart")
             span.description.eventHide #{event['description']}
             span.eventTags.eventHide 
-              //span(style="font-weight:bold") Tags: 
               if (event['tags'].length != 0)
-                for tag in event['tags']
-                  span(class='fa fa-tag tagSpan') &nbsp #{tag}
-                  br
+                span(class='fa fa-tag tagSpan') &nbsp #{event['tag']}
             span.eventButtons.eventHide
               span(class="updateEvent fa fa-edit")
               if (event['isRunning'])

@@ -20,26 +20,16 @@ $(document).ready(function(){
 
   $("#tags").autocomplete({
     source: function (request, response) {
-        var result = $.ui.autocomplete.filter(allTags, request.term);
-        response(result);
+      var result = $.ui.autocomplete.filter(allTags, request.term);
+      response(result);
     },
     minLength: 0,
   });
 
-  $("#tags").keypress(function(event) {
-    // For the record $(this).val() is getting the event... need to watch for that
-    //var tag = $(this).value;
-    if (event.which == 13) {
-      event.preventDefault();
-      addTag();
-    }
-  });
-
   var addTag = function(){
     var tag = $("#tags").val();
-    $('#tags').val('');
 
-    if($.inArray(tag, allTags) == -1){
+    if($.inArray(tag, allTags) == -1 && tag != ""){
       var data = {};
       data.name = tag;
       console.log(allTags);
@@ -53,7 +43,6 @@ $(document).ready(function(){
         statusCode: {
           200: function(data) {
             allTags.push(tag);
-            $('#addedTags').append('<li>' + tag + '</li>');
             console.log("successful add");
           },
           500: function() {
@@ -61,9 +50,6 @@ $(document).ready(function(){
           }
         }
       });
-    }
-    else{
-      $('#addedTags').append('<li>' + tag + '</li>');
     }
   };
 
@@ -202,20 +188,13 @@ $(document).ready(function(){
         break;
     }
 
-    var tags = [];
-    $('#addedTags').find('li').each(function(){
-      var tag = $(this).text();
-      if (tag != '') tags.push(tag);
-    });
-
-    if (tags.length == 0){
-      if (window.confirm("Tags are highly recommended, Would you like to add one?")){
-        isValid = false;
-      }
+    var tag = $('#tags').val();
+    if (!tag){
+      alert("Need a tag");
+      isValid = false;
     }
 
-
-    data.tags = tags;
+    data.tag = tag;
 
     if (data.name != '' && isValid){
       $.ajax({
