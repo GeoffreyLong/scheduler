@@ -25,7 +25,6 @@ $(document).ready(function(){
     url: 'http://localhost:3000/event/tags',
     statusCode: {
       200: function(data) {
-        console.log(data);
         data.forEach(function(elm){
           allTags.push(elm.name);
         });
@@ -35,6 +34,57 @@ $(document).ready(function(){
       }
     }
   });
+
+  // Will return the time spent on all events
+  var todaysMetrics = function(){
+    var data = {};
+    
+    var date = new Date();
+    date.setMinutes(0);
+    date.setHours(0);
+    date.setSeconds(0);
+    date.setMilliseconds(0);
+    data.time = Date.parse(date);
+    data.curTime = Date.now();
+
+    console.log(data.time);
+    $.ajax({
+      type: 'POST',
+      data: JSON.stringify(data),
+      contentType: 'application/json',
+      url: 'http://localhost:3000/event/metric/eventTime',
+      statusCode: {
+        200: function(data) {
+          console.log(data);
+        },
+        400: function() {
+          alert("Didn't work");
+        }
+      }
+    });
+  };
+
+  var tagBreakDown = function(){
+    allTags.forEach(function(elm){
+      var tagPieces = elm.split('.');
+      var fullTag = "";
+      var ul = $('#tempTagBreakdown');
+      tagPieces.forEach(function(inner){
+        fullTag += inner;
+        console.log(fullTag);
+        var newUl = $(ul).find('ul[data-tag="' + fullTag + '"]');
+        if (newUl.length !== 0){
+          console.log(newUl);
+          ul = newUl;
+        }
+        else{
+          ul.append('<li>' + inner + '</li>');
+          ul.append('<ul data-tag="' + fullTag +'">');
+        }
+      });
+    });
+  }
+
 
   $('.createEvent').click(function(){
     window.location.replace("http://localhost:3000/events/eventForm");    

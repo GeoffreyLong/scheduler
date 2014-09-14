@@ -208,6 +208,13 @@ $(document).ready(function(){
       if (tag != '') tags.push(tag);
     });
 
+    if (tags.length == 0){
+      if (window.confirm("Tags are highly recommended, Would you like to add one?")){
+        isValid = false;
+      }
+    }
+
+
     data.tags = tags;
 
     if (data.name != '' && isValid){

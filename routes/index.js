@@ -230,6 +230,39 @@ app.post('/event/metric/timespent', function(req, res){
     });
 });
 
+app.post('/event/metric/eventTime', function(req, res){
+  // TODO change this to an aggregate
+  Event.find({$or: [{'timeSheet.endTime' : {$gte : req.body.time}}, 
+                    {'timeSheet.endTime' : -1}]}, function(error, response){
+      if (error){
+        console.log(error);
+        res.status(500).send(error);
+      }
+      var timeSpent = [];
+
+      response.forEach(function(elm){
+        var curElm = {};
+        curElm.tags = elm.tags;
+        curElm.name = elm.name;
+        var curTime = 0;
+        elm.timeSheet.forEach(function(times){
+          var endTime = times.endTime;
+          var startTime = times.startTime;
+          if (endTime == -1) endTime = req.body.curTime;
+          if (startTime < req.body.time) startTime = req.body.time;
+          if (endTime >= req.body.time){
+            curTime += (endTime - startTime);
+          }
+        });
+        curElm.time = curTime;
+        timeSpent.push(curElm);
+      });
+
+      console.log(timeSpent);
+      res.status(200).send(timeSpent);
+    });
+});
+
 app.post('/event/tags', function(req, res){
   Tag.find().exec(function(error, response){
     if (error){
