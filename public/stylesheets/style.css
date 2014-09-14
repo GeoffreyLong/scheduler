@@ -1,8 +1,68 @@
 body{
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding:0;
+  margin:0;
 }
 a{
   color: #00B7FF;
+}
+
+.fa{
+  color:#000000;
+}
+.fa:hover{
+  color:#00B7FF;
+}
+.hide{
+  display:none;
+}
+
+/* TopBar */
+#topBar{
+  top:0px;
+  width:100%;
+  position:fixed;
+  background:#FFFFFF;
+  height:50px;
+  z-index:1000;
+}
+#topBar .fa{
+  padding:5px;
+}
+#topBar #runningLabel{
+  font-weight:bold;
+  position: relative;
+  top:0px;
+  float:right;
+}
+#topBar #runningEvents{
+  padding:0;
+  margin:0;
+  margin-left:5px;
+  position:relative;
+  top:0px;
+  float:right;
+  margin-right:50px;
+  background:#FFFFFF;
+}
+#topBar .runningEvent{
+  list-style-type: none;
+  text-align: right;
+}
+#topBar .runningEvent .timeElapsed{
+  display: inline-block;
+  width:80px;
+  text-align:left;
+}
+#topBar .topIcon{
+  margin-right:10px;
+}
+#content{
+  position:absolute;
+  top:50px;
+}
+#indexContent{
+  padding-left:70px;
 }
 
 /* Index */
@@ -12,72 +72,169 @@ a{
 }
 
 /* Show Events */
-li.createEvent{
-  font-weight: bold;
-  color: #209900;
-  list-style-type: none;
-  border: 1px solid #000000;
-  margin: 10px;
-  padding: 10px;
-  height: 20px;
-  width: 300px;
+.sideIcon{
+  position:fixed;
+  padding:5px;
+  z-index:1001;
 }
-.li.plusSign{
-  float:right;
+.sideIcon.fa-search{
+  top:50px;
+}
+.sideIcon.fa-tags{
+  top:100px;
+}
+.sideIcon.fa-bolt{
+  top:150px;
+  margin-left:10px;
+}
+.search{
+  margin-left:5px;
+  position:fixed;
+  height:35px;
+  left:50px;
+  background:#000000;
+  text-align:center;
+  width:0px;
+  -webkit-transition: width .5s ease;
+  -moz-transition: width .5s ease;
+  transition: width .5s ease;
+}
+.search.show{
+  width:250px;
+}
+.search#nameSearch{
+  top:57.5px;
+}
+.search input{
+  height:20px;
+  width:80%;
+  margin-top:4px;
+  display:none;
+}
+.search.show input{
+  display:inline-block;
+}
+.sideIcon.clicked{
+  color:#00B7FF;
+}
+.search#tagSearch{
+  top:107.5px;
+}
+li.event.createEvent{
+  color: #209900;
+  font-weight:bold;
 }
 .event{
+  top:0px;
   list-style-type: none;
   border: 1px solid #000000;
   margin: 10px;
+  margin-left: 20px;
   padding: 10px;
-  height: 20px;
   width: 300px;
   /* 
    * Worth noting that fadeout didn't work 
    * when the transition was applied to 'all' instead of 'height'
   */
+  /*
   -webkit-transition: height .5s ease;
   -moz-transition: height .5s ease;
   transition: height .5s ease;
+  */
   overflow: hidden;
 }
-.event .eventButton{
-  height: 20px;
+.event .eventHide{
   display: none;
 }
-.eventButton.start{
-
-}
-.eventButton.stop{
-
-}
-.eventButton.pause{
-
-}
-.eventButton.edit{
-
-}
-.eventButton.remove{
-
-}
-.event.expand {
-  height: 100px;
-}
-.event.expand .eventButton {
+.event.expand .eventHide{
   display: block;
 }
 .name{
+  display:inline-block;
   font-weight: bold;
+  width:225px;
 }
 .priority{
   float: right;
+  width:20px;
+}
+.tagSpan{
+  left:20px;
+}
+.tagSpan:hover{
+  color:#000000;
 }
 .no-close .ui-dialog-titlebar-close {
   display: none;
 }
+.eventButtons{
+  margin-bottom: -10px;
+  text-align:center;
+}
+.eventButtons .fa{
+  margin-top:15px;
+  background:#E0E0E0;
+  padding:3px;
+  padding-left:20px;
+  padding-right:20px;
+  border:1px solid #000000;
+  border-bottom:none;
+}
+.eventButtons .disabledButton{
+  background:#AAAAAA;
+}
+.eventButtons .disabledButton:hover{
+  color:#000000;
+}
+.event .fa-bolt{
+  color:#EEAA00;
+  padding-right:5px;
+}
+.event .fa-bolt:hover{
+  color:#000000;
+}
+.event .metrics{
+  position:relative;
+  float:right;
+  display:inline-block;
+  right:20px;
+  top:0px;
+}
+.eventMetrics{
+  display:none;
+  width:200px;
+  position:absolute;
+  left:380px;
+  background:#DDDDBB;
+  border-top:1px solid #000000;
+  z-index:1;
+}
+.eventMetrics.show{
+  display:inline-block;
+}
+.eventMetrics td{
+
+}
+.eventWrapper{
+  width:600px;
+}
+
+
+/* Fixed Content */
+/* Right now this is fixed, will only really work for my screen */
+#fixedContent{
+  position:fixed;
+  left: 400px;
+  top: 50px;
+  height:625px;
+  width:925px;
+}
 
 
 /* newEvents */
+#eventFormTable{
+  padding:20px;
+}
 .hide{
   display: none;
 }
@@ -91,6 +248,20 @@ li.createEvent{
 	-webkit-appearance: none;  /*Removes default chrome and safari style*/
 	-moz-appearance: none; /* Removes Default Firefox style*/
 }
+#addTags td:first-child{
+  position:relative;
+  top: 5px;
+  vertical-align:top;
+}
+#addTags ul{
+  margin:0px;
+  margin-left: -40px;
+}
+#addTags li{
+  list-style-type:none;
+  margin:0;
+}
+
 
 
 

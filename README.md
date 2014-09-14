@@ -1,28 +1,31 @@
 scheduler
 =========
 
-<p> Hopefully this readme works </p>
-
-<p>
-  Initial Parameters for Events
-  <ul>
-    <li> name: String </li>
-    <li> isRecurring: Boolean -> if true then will need new parameters
-    <ul>
-      <li> inverval: int -> how often it recurs (in days -- subject to change) </li>
-    </ul>
-    </li>
-    <li> avgDuration: int (prefer Unix format) -> if no high/low then how long event is, if high/low then an estimate </li>
-    <li> lowDuration: int (prefer Unix format) -> min time for the event </li>
-    <li> highDuration: int (prefer Unix format) -> high estimate for the event </li>
-    <li> breakable: boolean -> ie can it be broken into smaller time scales (class would be false but an assignment would be true) </li>
-    <li> startDate: Unix time stamp -> start date and time of event </li>
-    <li> endDate: Unix time stamp -> end date and time, if project this is the due date, if isRecurring then is the date and time for start of last iteration </li>
-    <li> priority: int -> the priority of the event </li>
-    <li> type: string -> the category of event (ie. school, fitness, procrastination, extracurricular) </li>
-  </ul>
+<p> 
+  This is essentially a Productivity app.
+  Scheduler is something of a misnomer and should probably be changed 
 </p>
+<p>
+  This application, in its current iteration is simply a tasker.
+  In the future I hope to incorporate the following:
+</p>
+<ul>
+  <li> Calendar consisting of day, week, and month breakdowns </li>
+  <li> Activity tracker: to see how my time is spent </li>
+  <li> Activity optimizer: to analyze trends from the tracker to optimize my day to day productivity </li>
+  <li> Planner: to plan out my day according to optimizations proposed from the optimizer </li>
+  <li> Project organizer: to provide a location in which to store the various projects I may be working on </li>
+  <li> And many more small features to come </li>
+</ul>
+
+Some Definitions:
+<ul>
+  <li> Task: An event which doesn't have a set start and end time </li>
+  <li> Event: has a set start and end time </li>
+  <li> Activity: A superset of tasks and events, these are categories like fitness, school, etc where smaller tasks such as Evolutionary Computation assignment one may fall under.  There is no set criteria for these.  For now they will be bottom levels of Tags.  </li>
+  <li> Instance: For activity tracking, this is simply a name and a date created.  An example would be something like "had a cup of coffee" from there you could analyze how that affected your productivity.  I want to apply statistical machine learning at some point to analyze trends, fields such as these could prove useful. </li>
+</ul>
 
 <p>
-  The original iteration will simply consist of the following: name, startDate, avgDuration
+  Generally, this is an application that I am trying to tailor towards my everyday life in order to increase my productivity.  I wouldn't expect anyone to check out this repository, however, if you do and you have some suggestions, or if you want to contribute, please feel free to do so.  This is my first major (relative to what I usually do) webapp undertaken alone, so any suggestions are welcome.
 </p>

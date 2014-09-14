@@ -1,4 +1,58 @@
 $(document).ready(function(){
+  var allTags = [];
+  $.ajax({
+    type: 'POST',
+    contentType: 'application/json',
+    url: 'http://localhost:3000/event/tags',
+    async: false,
+    statusCode: {
+      200: function(data) {
+        console.log(data);
+        data.forEach(function(elm){
+          allTags.push(elm.name);
+        });
+      },
+      400: function() {
+        alert("Didn't work");
+      }
+    }
+  });
+
+  $("#tags").autocomplete({
+    source: function (request, response) {
+      var result = $.ui.autocomplete.filter(allTags, request.term);
+      response(result);
+    },
+    minLength: 0,
+  });
+
+  var addTag = function(){
+    var tag = $("#tags").val();
+
+    if($.inArray(tag, allTags) == -1 && tag != ""){
+      var data = {};
+      data.name = tag;
+      console.log(allTags);
+      console.log(tag);
+      $.ajax({
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        url: 'http://localhost:3000/event/tag/create',
+        async: false,
+        statusCode: {
+          200: function(data) {
+            allTags.push(tag);
+            console.log("successful add");
+          },
+          500: function() {
+            alert("Didn't work");
+          }
+        }
+      });
+    }
+  };
+
   var portToDate = function(oldDate){
     // Hacky workaround because the Date.parse cant seem to parse anything
     var date = oldDate.replace(/['"]+/g, '');
@@ -59,12 +113,19 @@ $(document).ready(function(){
       case "task":
         $('.taskToggle').removeClass("hide");
         $('.eventToggle').addClass("hide");
+        $('.activityToggle').removeClass("hide");
         break;
       case "rEvent":
         $('.rToggle').removeClass("hide");
       case "event":
         $('.eventToggle').removeClass("hide");
         $('.taskToggle').addClass("hide");
+        $('.activityToggle').removeClass("hide");
+        break;
+      case "activity":
+        $('.taskToggle').addClass("hide");
+        $('.eventToggle').addClass("hide");
+        $('.activityToggle').addClass("hide");
         break;
     }
     //$('.eventToggle').toggleClass('hide');
@@ -80,6 +141,8 @@ $(document).ready(function(){
   $('#submit').click(function(e){
     e.preventDefault();
     console.log('submit clicked');
+
+    addTag();
     var isValid = true;
 
     var data = {};
@@ -120,7 +183,18 @@ $(document).ready(function(){
           alert("End Date cannot be before Start Date");
         }
         break;
+      case "activity":
+        data.priority = 0;
+        break;
     }
+
+    var tag = $('#tags').val();
+    if (!tag){
+      alert("Need a tag");
+      isValid = false;
+    }
+
+    data.tag = tag;
 
     if (data.name != '' && isValid){
       $.ajax({
@@ -131,6 +205,7 @@ $(document).ready(function(){
         statusCode: {
           200: function() {
             $('#success').dialog('open').delay(1000).fadeOut(1000, function(){
+              $('#success').dialog('close');
               window.location.replace("http://localhost:3000/events/show");
             });
           },
