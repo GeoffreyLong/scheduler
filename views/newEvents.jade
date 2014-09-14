@@ -9,9 +9,9 @@ block content
   - var hours = 24
   table(id="eventFormTable")
     tr
-      td Event Name
+      td Name
       td
-        input(type="text", placeholder="Event name", value=name)#name
+        input(type="text", value=name)#name
     tr(id="addTags")
       td Tags
       td
@@ -27,7 +27,7 @@ block content
     // If "recurring" then it will occur according to the interval
     //    Daily or weekly to start out
     tr
-      td Event Type
+      td Type
       td
         select#eventType
           each value, i in eventTypes

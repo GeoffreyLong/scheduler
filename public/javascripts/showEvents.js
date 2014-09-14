@@ -86,10 +86,6 @@ $(document).ready(function(){
   }
 
 
-  $('.createEvent').click(function(){
-    window.location.replace("http://localhost:3000/events/eventForm");    
-  });
-
   $('.deleteEvent').click(function(e){
     e.stopPropagation();
     var event = $(this).parent().parent();
@@ -300,7 +296,7 @@ $(document).ready(function(){
     $(this).toggleClass("clicked");
     if($(this).hasClass("clicked")){
       $('.event').each(function(index, value){
-        if (!($(this).hasClass("running") || $(this).hasClass("createEvent"))){
+        if (!$(this).hasClass("running")){
           $(this).addClass('hide');
         }
       });
@@ -314,25 +310,23 @@ $(document).ready(function(){
 
   $('#nameSearch').keypress(function(event) {
     $('.event').each(function(index, value){
-      if (!$(this).hasClass('createEvent')){
-        var eventName = $(this).find('.name').text().toLowerCase();
-        var searchedName = $('#nameSearch input').val().toLowerCase();
-        // Remember that indexOf without the != will pass all basically
-        if ($('.fa-bolt').hasClass("clicked")){
-          if(eventName.indexOf(searchedName) == -1){
-            $(this).addClass('hide');
-          }
-          else{
-            if ($(this).hasClass('running')) $(this).removeClass('hide');
-          }
+      var eventName = $(this).find('.name').text().toLowerCase();
+      var searchedName = $('#nameSearch input').val().toLowerCase();
+      // Remember that indexOf without the != will pass all basically
+      if ($('.fa-bolt').hasClass("clicked")){
+        if(eventName.indexOf(searchedName) == -1){
+          $(this).addClass('hide');
         }
         else{
-          if(eventName.indexOf(searchedName) == -1){
-            $(this).addClass('hide');
-          }
-          else{
-            $(this).removeClass('hide');
-          }
+          if ($(this).hasClass('running')) $(this).removeClass('hide');
+        }
+      }
+      else{
+        if(eventName.indexOf(searchedName) == -1){
+          $(this).addClass('hide');
+        }
+        else{
+          $(this).removeClass('hide');
         }
       }
     });
@@ -345,25 +339,23 @@ $(document).ready(function(){
 
   $('#tagSearch').keypress(function(event) {
     $('.event').each(function(index, value){
-      if (!$(this).hasClass('createEvent')){
-        var eventName = $(this).find('.tagSpan').text().toLowerCase();
-        var searchedName = $('#tagSearch input').val().toLowerCase();
-        // Remember that indexOf without the != will pass all basically
-        if ($('.fa-bolt').hasClass("clicked")){
-          if(eventName.indexOf(searchedName) == -1){
-            $(this).addClass('hide');
-          }
-          else{
-            if ($(this).hasClass('running')) $(this).removeClass('hide');
-          }
+      var eventName = $(this).find('.tagSpan').text().toLowerCase();
+      var searchedName = $('#tagSearch input').val().toLowerCase();
+      // Remember that indexOf without the != will pass all basically
+      if ($('.fa-bolt').hasClass("clicked")){
+        if(eventName.indexOf(searchedName) == -1){
+          $(this).addClass('hide');
         }
         else{
-          if(eventName.indexOf(searchedName) == -1){
-            $(this).addClass('hide');
-          }
-          else{
-            $(this).removeClass('hide');
-          }
+          if ($(this).hasClass('running')) $(this).removeClass('hide');
+        }
+      }
+      else{
+        if(eventName.indexOf(searchedName) == -1){
+          $(this).addClass('hide');
+        }
+        else{
+          $(this).removeClass('hide');
         }
       }
     });
