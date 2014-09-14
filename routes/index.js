@@ -21,13 +21,13 @@ var EventSchema = new Schema({
     startDate: Date,
     endDate: Date,
     recurranceInterval: String,
-    isComplete: Boolean,
     isRunning: Boolean,
     timeSheet: [{
         startTime: Number,
         endTime: Number,
     }],
     tag: String,
+    completedOn: Date,
 });
 var TagSchema = new Schema({
     name: String,
@@ -65,7 +65,6 @@ app.post('/event/create', function(req,res) {
       startDate: req.body.startDate,
       endDate: req.body.endDate,
       recurranceInterval: req.body.recurranceInterval,
-      isComplete: false,
       isRunning: false,
       tag: req.body.tag,
   }).save(function(err,saved){
@@ -108,22 +107,29 @@ app.get('/event/update/:id', function(req,res){
       startDate: response.startDate,
       endDate: response.endDate,
       recurranceInterval: response.recurranceInterval,
-      isComplete: response.isComplete,
       isRunning: response.isRunning,
       tag: response.tag,
+      completedOn: response.completedOn,
       script: '/javascripts/newEvents.js',
     });
   });
 });
 
 app.get('/events/show', function(req,res) {
-  Event.find({isComplete : {$in : [false, null]}}).sort({priority: -1}).exec(function(error, response){
+  Event.find({completedOn: {$in : [null]}}).sort({priority: -1}).exec(function(error, response){
     // will want to res.send the response back
+    console.log(error);
     res.render('showEvents', { events: response, script: '/javascripts/showEvents.js' });
   });
 });
 
-
+// Sort not working properly
+app.get('/events/completed', function(req,res) {
+  Event.find({completedOn : {$nin: [null]}}).sort({'completedOn': -1}).exec(function(error, response){
+    // will want to res.send the response back
+    res.render('showEvents', { events: response, script: '/javascripts/showEvents.js' });
+  });
+});
 
 app.get('/calendar/month', function(req, res){
   res.render('showMonth', { script: '/javascripts/showMonth.js' });
@@ -189,7 +195,7 @@ app.post('/event/action/complete', function(req, res){
   });
   Event.findByIdAndUpdate(req.body.id,
                   {'$set': {'isRunning' : false,
-                  'isComplete' : true}},
+                  'completedOn' : req.body.time}},
                 function(error, response){
     if (error){
       console.log(error);
