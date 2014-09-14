@@ -283,4 +283,12 @@ app.post('/event/tag/create', function(req, res){
   });  
 });
 
+app.get('/activities/show', function(req, res){
+  //TODO change the sorting
+  Event.find({eventType : 'activity'}).sort({priority: -1}).exec(function(error, response){
+    // will want to res.send the response back
+    res.render('showActivities', { activities: response, script: '/javascripts/showActivities.js' });
+  });
+});
+
 module.exports = app;

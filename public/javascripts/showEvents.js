@@ -307,7 +307,7 @@ $(document).ready(function(){
     }
     else{
       $('.event').each(function(index, value){
-          $(this).removeClass('hide');
+        $(this).removeClass('hide');
       });
     }
   });
