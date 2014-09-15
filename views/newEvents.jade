@@ -49,6 +49,17 @@ block content
       td Due Date
       td
         input(id="dueDate", type="text")
+        span @
+        select(class="timePicker", id="durHour")
+          - for(var i=0; i<hours; i++)
+            option(value=i) #{i}
+        span :
+        select(class="timePicker", id="durMinute")
+          - for(var i=0; i<minutes; i++)
+            if(i<10)
+              option(value=i) 0#{i}
+            else
+              option(value=i) #{i}
 
     tr(class="taskToggle" id="expectedDurationTR" data-duration=expectedDuration)
       td Expected Duration

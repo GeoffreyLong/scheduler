@@ -162,6 +162,7 @@ $(document).ready(function(){
       case "task":
         data.expectedDuration = parseInt($('#durHours').val() * 60 + parseInt($('#durMins').val()));
         data.dueDate = Date.parse($('#dueDate').val());
+        data.dueDate += 60 * 1000 * ((parseInt($('#durHour').val())+4) * 60 + parseInt($('#durMinute').val()));
         if(data.dueDate < Date.now()){
           isValid = false;
           alert("Date cannot be before now");
@@ -171,9 +172,9 @@ $(document).ready(function(){
         data.recurranceInterval = $('#recurranceInterval').val();
       case "event":
         data.startDate = Date.parse($('#startDate').val());
-        data.startDate += 60 * 1000 * (parseInt($('#startHour').val()) * 60 + parseInt($('#startMinute').val()));
+        data.startDate += 60 * 1000 * ((parseInt($('#startHour').val())+4) * 60 + parseInt($('#startMinute').val()));
         data.endDate = Date.parse($('#endDate').val()); 
-        data.endDate += 60 * 1000 * (parseInt($('#endHour').val()) * 60 + parseInt($('#endMinute').val()));
+        data.endDate += 60 * 1000 * ((parseInt($('#endHour').val())+4) * 60 + parseInt($('#endMinute').val()));
         if(data.startDate < Date.now() || data.endDate < Date.now()){
           isValid = false;
           alert("Date cannot be before now");
