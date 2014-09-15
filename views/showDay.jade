@@ -25,23 +25,31 @@ block content
   - var minutes = 60
   - var hours = 24
 
+  table
+    tr 
+      td(style='font-weight:bold') Layout Name :
+      td
+        input(type="text" id='layouts')
   ul(id='dayLayoutSetImplicit' class="dayLayoutSet")
     li
       table
         tr
           td Tag : 
           td &nbsp 
-            input(type="text")
+            input(id="layoutTag" type="text")
           td &nbsp Min Time Spent :
             &nbsp 
-            input(type="text")
+            input(id="layoutMinTime" type="text" placeholder="minutes")
           td &nbsp Max Time Spent :
             &nbsp 
-            input(type="text")
-          td +
+            input(id="layoutMaxTime" type="text", placeholder="minutes")
+          td 
+            input(id="addLayoutSub" type="button", value="Add")
+  ul(id='currentImplicitLayout')
 
   // Table Layout Setter
-  ul(id='dayLayoutSetExplicit' class="dayLayoutSet")
+  // This will be for later
+  //ul(id='dayLayoutSetExplicit' class="dayLayoutSet")
     li(class='addNewTimes')
       table 
         tr
