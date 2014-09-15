@@ -277,7 +277,6 @@ app.post('/event/metric/eventTime', function(req, res){
         timeSpent.push(curElm);
       });
 
-      console.log(timeSpent);
       res.status(200).send(timeSpent);
     });
 });
@@ -306,6 +305,15 @@ app.get('/activities/show', function(req, res){
   //TODO change the sorting
   Event.find({eventType : 'activity'}).sort({priority: -1}).exec(function(error, response){
     // will want to res.send the response back
+    res.render('showActivities', { activities: response, script: '/javascripts/showEvents.js' });
+  });
+});
+
+// TODO fix all this event vs activity logic
+app.get('/events/recent', function(req, res){
+  Event.find({'timeSheet.startTime':{$gte:0}}).sort({'timeSheet.startTime': -1}).limit(10).exec(function(error, response){
+    // will want to res.send the response back
+    console.log(response);
     res.render('showActivities', { activities: response, script: '/javascripts/showEvents.js' });
   });
 });
