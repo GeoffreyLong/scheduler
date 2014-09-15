@@ -116,7 +116,7 @@ app.get('/event/update/:id', function(req,res){
 });
 
 app.get('/events/show', function(req,res) {
-  Event.find({completedOn: {$in : [null]}}).sort({priority: -1}).exec(function(error, response){
+  Event.find({completedOn: {$in : [null]}, eventType: {$ne : 'activity'}}).sort({priority: -1}).exec(function(error, response){
     // will want to res.send the response back
     console.log(error);
     res.render('showEvents', { events: response, script: '/javascripts/showEvents.js' });
@@ -305,7 +305,7 @@ app.get('/activities/show', function(req, res){
   //TODO change the sorting
   Event.find({eventType : 'activity'}).sort({priority: -1}).exec(function(error, response){
     // will want to res.send the response back
-    res.render('showActivities', { activities: response, script: '/javascripts/showEvents.js' });
+    res.render('showEvents', { events: response, script: '/javascripts/showEvents.js' });
   });
 });
 
@@ -314,7 +314,10 @@ app.get('/events/recent', function(req, res){
   Event.find({'timeSheet.startTime':{$gte:0}}).sort({'timeSheet.startTime': -1}).limit(10).exec(function(error, response){
     // will want to res.send the response back
     console.log(response);
-    res.render('showActivities', { activities: response, script: '/javascripts/showEvents.js' });
+    response.forEach(function(elm){
+      elm.priority = 0;
+    });
+    res.render('showEvents', { events: response, script: '/javascripts/showEvents.js' });
   });
 });
 

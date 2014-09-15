@@ -15,12 +15,12 @@ block content
           tr
             td(style="font-weight:bold") Time Spent = 
             td(id="timeSpent")
-        if (event['priority'] > 0)
           li(class=(event['isRunning'] == true ? "event running" : "event"), data-id=event['id'])
             if (event['isRunning'])
               span(class="fa fa-bolt")
             span.name #{event['name']}
-            span.priority #{event['priority']}
+            if (event['priority'] > 0)
+              span.priority #{event['priority']}
             span(class="metrics fa fa-line-chart")
             span.description.eventHide #{event['description']}
             span.eventTags.eventHide 
