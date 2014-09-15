@@ -186,7 +186,8 @@ $(document).ready(function(){
             var li = "<li class='runningEvent' data-id='"
               + id + "' data-startTime = " + data.time + ">" + event.find('.name').text() 
               + "<span style='font-weight:bold'> Time Elapsed: </span>"
-              + "<span class='timeElapsed'>  </span> </li>";
+              + "<span class='timeElapsed'>  </span>"
+              + "<span class='topPause fa fa-pause' style='margin:0; padding:0'> </span></li>";
             $('#runningEvents').append(li);
           },
           500: function() {
