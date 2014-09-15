@@ -379,4 +379,38 @@ $(document).ready(function(){
       $('#tagSearch').toggleClass("show");
     }
   });
+
+  $('.unCompleteEvent').click(function(e){
+    e.stopPropagation();
+    var event = $(this).parent().parent();
+    data = {};
+    data.id = event.attr("data-id");
+    console.log('Complete event, event_id = ' + data.id);      
+    
+    $.ajax({
+      type: 'POST',
+      data: JSON.stringify(data),
+      contentType: 'application/json',
+      url: 'http://localhost:3000/event/action/uncomplete',
+      statusCode: {
+        200: function() {
+          $('#runningEvents').find('li[data-id="' + data.id + '"]').remove();
+          if ($('#runningEvents').find("li").length == 0){
+            $('#runningLabel').addClass("hide");
+          }
+          else{
+            $('#runningLabel').removeClass("hide");
+          }            
+          console.log("Successful completion");
+          event.removeClass("expand");
+          event.fadeOut(1000, function(){ 
+            $(this).remove();
+          });
+        },
+        500: function() {
+          alert("Didn't work");
+        }
+      }
+    });
+  });
 });
