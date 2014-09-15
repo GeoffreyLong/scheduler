@@ -55,14 +55,35 @@ $(document).ready(function(){
       url: 'http://localhost:3000/event/metric/eventTime',
       statusCode: {
         200: function(data) {
-          console.log(data);
+          var date = new Date();
+          date.setHours(0);
+          date.setMinutes(0);
+          date.setSeconds(0);
+          date.setMilliseconds(0);
+          var hoursSoFar = Date.now() - Date.parse(date);
+          
+          var table = $('#todayMetricsTable');
+          var appendString = '';
+          data.forEach(function(dataPt){
+            var timeSpentToday = (100*dataPt.time / hoursSoFar);
+            
+            
+            appendString += '<tr><td style="width:200px">';
+            appendString += dataPt.name;
+            appendString += '</td><td><div style="background: #000000; height:12px; width:';
+            appendString += timeSpentToday;
+            appendString += '%"></div></td><td style="width:30px">';
+            appendString += parseInt(timeSpentToday*10) / 10 + '%';
+            appendString += '</td></tr>';
+          });
+          table.append(appendString);
         },
         400: function() {
           alert("Didn't work");
         }
       }
     });
-  };
+  }; todaysMetrics();
 
   var tagBreakDown = function(){
     allTags.forEach(function(elm){
