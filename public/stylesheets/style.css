@@ -325,3 +325,8 @@ li.event.createEvent{
 #dayEvents .hourStart {
   border-top: 1px solid white;
 }
+.dayLayoutSet li{
+  list-style-type:none;
+  border:1px solid #000000;
+  padding: 3px;
+}
