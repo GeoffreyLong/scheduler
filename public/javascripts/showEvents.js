@@ -317,90 +317,65 @@ $(document).ready(function(){
     });
   });
 
+  
+  var eventFilter = {
+    searchName : '',
+    tagName : '',
+    isRunFilter : false,
+
+    filterEvents : function(events){
+      searchName = $('#nameSearch input').val().toLowerCase();
+      tagName = $('#tagSearch input').val().toLowerCase();
+
+      events.each(function(){
+        var eventName = $(this).find('.name').text().toLowerCase();
+        var eventTag = $(this).find('.tagSpan').text().toLowerCase();
+        $(this).removeClass('hide');
+        if (eventFilter.isRunFilter){
+          if (!$(this).hasClass('running')) $(this).addClass('hide');
+        }
+        if(eventName.indexOf(searchName) == -1 || eventTag.indexOf(tagName) == -1){
+          $(this).addClass('hide');
+        }
+      });
+    },
+  };
+
   $('.fa-search').click(function(e){
-    $(this).toggleClass("clicked");
     $('#nameSearch').toggleClass("show");
+    if ($('#nameSearch').hasClass("show")) $(this).addClass("clicked");
     $('#nameSearch input').focus();
+    $('#nameSearch input').select();
+    eventFilter.filterEvents($('.event'));
   });
   $('.fa-tags').click(function(e){
-    $(this).toggleClass("clicked");
     $('#tagSearch').toggleClass("show");
+    if ($('#tagSearch').hasClass("show")) $(this).addClass("clicked");
     $('#tagSearch input').focus();
+    $('#tagSearch input').select();
+    eventFilter.filterEvents($('.event'));
   });
-  // TODO All of this logic should be cleaned up
   $('.sideIcon.fa-bolt').click(function(e){
     $(this).toggleClass("clicked");
-    if($(this).hasClass("clicked")){
-      $('.event').each(function(index, value){
-        if (!$(this).hasClass("running")){
-          $(this).addClass('hide');
-        }
-      });
-    }
-    else{
-      $('.event').each(function(index, value){
-        $(this).removeClass('hide');
-      });
-    }
+    if ($(this).hasClass("clicked")) eventFilter.isRunFilter = true;
+    else eventFilter.isRunFilter = false;
+    eventFilter.filterEvents($('.event'));
   });
-
   $('#nameSearch').keypress(function(event) {
-    $('.event').each(function(index, value){
-      var eventName = $(this).find('.name').text().toLowerCase();
-      var searchedName = $('#nameSearch input').val().toLowerCase();
-      // Remember that indexOf without the != will pass all basically
-      if ($('.fa-bolt').hasClass("clicked")){
-        if(eventName.indexOf(searchedName) == -1){
-          $(this).addClass('hide');
-        }
-        else{
-          if ($(this).hasClass('running')) $(this).removeClass('hide');
-        }
-      }
-      else{
-        if(eventName.indexOf(searchedName) == -1){
-          $(this).addClass('hide');
-        }
-        else{
-          $(this).removeClass('hide');
-        }
-      }
-    });
+    eventFilter.filterEvents($('.event'));
     if(event.which == 13){
-      $('#nameSearch input').val('');
-      $('.fa-search').toggleClass("clicked");
+      if ($('#nameSearch input').val() === '') $('.fa-search').removeClass("clicked");
       $('#nameSearch').toggleClass("show");
     }
   });
-
   $('#tagSearch').keypress(function(event) {
-    $('.event').each(function(index, value){
-      var eventName = $(this).find('.tagSpan').text().toLowerCase();
-      var searchedName = $('#tagSearch input').val().toLowerCase();
-      // Remember that indexOf without the != will pass all basically
-      if ($('.fa-bolt').hasClass("clicked")){
-        if(eventName.indexOf(searchedName) == -1){
-          $(this).addClass('hide');
-        }
-        else{
-          if ($(this).hasClass('running')) $(this).removeClass('hide');
-        }
-      }
-      else{
-        if(eventName.indexOf(searchedName) == -1){
-          $(this).addClass('hide');
-        }
-        else{
-          $(this).removeClass('hide');
-        }
-      }
-    });
+    eventFilter.filterEvents($('.event'));
     if(event.which == 13){
-      $('#tagSearch input').val('');
-      $('.fa-tags').toggleClass("clicked");
+      if ($('#tagSearch input').val() === '') $('.fa-tags').toggleClass("clicked");
       $('#tagSearch').toggleClass("show");
     }
   });
+
 
   $('.unCompleteEvent').click(function(e){
     e.stopPropagation();
