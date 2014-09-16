@@ -87,6 +87,9 @@ a{
   top:150px;
   margin-left:10px;
 }
+.sideIcon.fa-eye{
+  top:200px;
+}
 .search{
   margin-left:5px;
   position:fixed;

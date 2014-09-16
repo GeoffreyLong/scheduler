@@ -344,6 +344,7 @@ $(document).ready(function(){
   $('.fa-search').click(function(e){
     $('#nameSearch').toggleClass("show");
     if ($('#nameSearch').hasClass("show")) $(this).addClass("clicked");
+    else if($('#nameSearch input').val() === '') $(this).removeClass("clicked");
     $('#nameSearch input').focus();
     $('#nameSearch input').select();
     eventFilter.filterEvents($('.event'));
@@ -351,6 +352,7 @@ $(document).ready(function(){
   $('.fa-tags').click(function(e){
     $('#tagSearch').toggleClass("show");
     if ($('#tagSearch').hasClass("show")) $(this).addClass("clicked");
+    else if($('#tagSearch input').val() === '') $(this).removeClass("clicked");
     $('#tagSearch input').focus();
     $('#tagSearch input').select();
     eventFilter.filterEvents($('.event'));
@@ -409,5 +411,8 @@ $(document).ready(function(){
         }
       }
     });
+  });
+
+  $('#eventViews').click(function(){
   });
 });
