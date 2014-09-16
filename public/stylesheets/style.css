@@ -161,6 +161,7 @@ a{
   color:#FFFFFF;
 }
 .viewIcon.fa-align-justify{
+  z-index:1002;
   left:5px;
 }
 .viewIcon.fa-indent{
