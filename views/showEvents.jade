@@ -25,30 +25,30 @@ block content
           tr
             td(style="font-weight:bold") Time Spent = 
             td(id="timeSpent")
-          li(class=(event['isRunning'] == true ? "event running" : "event"), data-id=event['id'])
-            if (event['isRunning'])
-              span(class="fa fa-bolt")
-            span.name #{event['name']}
-            if (event['priority'] > 0)
-              span.priority #{event['priority']}
-            span(class="metrics fa fa-line-chart")
-            span.description.eventHide #{event['description']}
-            span.eventTags.eventHide 
-              if (event['tag'])
-                span(class='fa fa-tag tagSpan') &nbsp #{event['tag']}
-            span.eventButtons.eventHide
-              if (event['completedOn'] == null)
-                span(class="updateEvent fa fa-edit")
-                if (event['isRunning'])
-                  span(class="startEvent fa fa-play disabledButton")
-                  span(class="pauseEvent fa fa-pause")
-                else
-                  span(class="startEvent fa fa-play")
-                  span(class="pauseEvent fa fa-pause disabledButton")
-                span(class="completeEvent fa fa-check")
+        li(class=(event['isRunning'] == true ? "event running" : "event"), data-id=event['id'])
+          if (event['isRunning'])
+            span(class="fa fa-bolt")
+          span.name #{event['name']}
+          if (event['priority'] > 0)
+            span.priority #{event['priority']}
+          span(class="metrics fa fa-line-chart")
+          span.description.eventHide #{event['description']}
+          span.eventTags.eventHide 
+            if (event['tag'])
+              span(class='fa fa-tag tagSpan') &nbsp #{event['tag']}
+          span.eventButtons.eventHide
+            if (event['completedOn'] == null)
+              span(class="updateEvent fa fa-edit")
+              if (event['isRunning'])
+                span(class="startEvent fa fa-play disabledButton")
+                span(class="pauseEvent fa fa-pause")
               else
-                span(class="unCompleteEvent fa fa-undo")
-              span(class="deleteEvent fa fa-trash")
+                span(class="startEvent fa fa-play")
+                span(class="pauseEvent fa fa-pause disabledButton")
+              span(class="completeEvent fa fa-check")
+            else
+              span(class="unCompleteEvent fa fa-undo")
+            span(class="deleteEvent fa fa-trash")
 
   div(id="fixedContent")
     div(id="todayMetrics")
