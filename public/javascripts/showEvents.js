@@ -414,5 +414,25 @@ $(document).ready(function(){
   });
 
   $('#eventViews').click(function(){
+    $(this).toggleClass('clicked');
+    if ($(this).hasClass('clicked')){
+      $('#viewHolder').addClass('show');
+    }
+    else{
+      $('#viewHolder').removeClass('show');
+    }
+  });
+  $('.viewIcon').click(function(e){
+    e.stopPropagation();
+    $('.viewIcon').toggleClass('clicked');
+    var data = {};
+    data.viewType = $('.viewIcon.clicked').attr('data-type');
+    console.log("Switching to view: " + data.viewType);
+    $.ajax({
+      type: 'POST',
+      data: JSON.stringify(data),
+      contentType: 'application/json',
+      url: 'http://localhost:3000/events/viewType',
+    });
   });
 });

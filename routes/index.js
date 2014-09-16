@@ -43,6 +43,12 @@ var bodyParser = require('body-parser');
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use( bodyParser.urlencoded() ); // to support URL-encoded bodies
 
+
+// Used in rendering the event layouts
+// Currently either 'flat' or 'hierarchical'
+// Default is flat
+var eventView = 'flat';
+
 /* GET home page. */
 app.get('/', function(req, res) {
   res.render('index', { title: 'Scheduler' });
@@ -119,7 +125,7 @@ app.get('/events/show', function(req,res) {
   Event.find({completedOn: {$in : [null]}, eventType: {$ne : 'activity'}}).sort({priority: -1}).exec(function(error, response){
     // will want to res.send the response back
     console.log(error);
-    res.render('showEvents', { events: response, script: '/javascripts/showEvents.js' });
+    res.render('showEvents', { events: response, viewType: eventView, script: '/javascripts/showEvents.js' });
   });
 });
 
@@ -127,7 +133,7 @@ app.get('/events/show', function(req,res) {
 app.get('/events/completed', function(req,res) {
   Event.find({completedOn : {$nin: [null]}}).sort({'completedOn': -1}).exec(function(error, response){
     // will want to res.send the response back
-    res.render('showEvents', { events: response, script: '/javascripts/showEvents.js' });
+    res.render('showEvents', { events: response, viewType: eventView, script: '/javascripts/showEvents.js' });
   });
 });
 
@@ -305,7 +311,7 @@ app.get('/activities/show', function(req, res){
   //TODO change the sorting
   Event.find({eventType : 'activity'}).sort({priority: -1}).exec(function(error, response){
     // will want to res.send the response back
-    res.render('showEvents', { events: response, script: '/javascripts/showEvents.js' });
+    res.render('showEvents', { events: response, viewType: eventView, script: '/javascripts/showEvents.js' });
   });
 });
 
@@ -317,8 +323,13 @@ app.get('/events/recent', function(req, res){
     response.forEach(function(elm){
       elm.priority = 0;
     });
-    res.render('showEvents', { events: response, script: '/javascripts/showEvents.js' });
+    res.render('showEvents', { events: response, viewType: eventView, script: '/javascripts/showEvents.js' });
   });
+});
+
+// TODO put into user schema when we have one
+app.post('/events/viewType', function(req,res){
+  eventView = req.body.viewType;
 });
 
 module.exports = app;
