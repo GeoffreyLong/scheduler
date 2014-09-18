@@ -54,6 +54,14 @@ app.get('/', function(req, res) {
   res.render('index', { title: 'Scheduler' });
 });
 
+// Will eventually want to use this function
+// Could pass in a req which would choose how it is sorted
+app.get('/events', function(req, res){
+  Event.find().sort({'timeSheet.startTime': -1}).exec(function(error, response){
+
+  });
+});
+
 app.get('/event/:id', function(req,res){
   
 });
