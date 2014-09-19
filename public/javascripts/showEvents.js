@@ -341,23 +341,29 @@ $(document).ready(function(){
     },
   };
 
-  $('.fa-search').click(function(e){
+  var triggerNameSearch = function(){
     $('#nameSearch').toggleClass("show");
     if ($('#nameSearch').hasClass("show")) $(this).addClass("clicked");
     else if($('#nameSearch input').val() === '') $(this).removeClass("clicked");
     $('#nameSearch input').focus();
     $('#nameSearch input').select();
     eventFilter.filterEvents($('.event'));
+  };
+  $('.fa-search').click(function(e){
+    triggerNameSearch();
   });
-  $('.fa-tags').click(function(e){
+  var triggerTagSearch = function(){
     $('#tagSearch').toggleClass("show");
     if ($('#tagSearch').hasClass("show")) $(this).addClass("clicked");
     else if($('#tagSearch input').val() === '') $(this).removeClass("clicked");
     $('#tagSearch input').focus();
     $('#tagSearch input').select();
     eventFilter.filterEvents($('.event'));
+  };
+  $('.fa-tags').click(function(e){
+    triggerTagSearch();
   });
-  $('.sideIcon.fa-bolt').click(function(e){
+  $('#filterHolder .fa-bolt').click(function(e){
     $(this).toggleClass("clicked");
     if ($(this).hasClass("clicked")) eventFilter.isRunFilter = true;
     else eventFilter.isRunFilter = false;
@@ -435,4 +441,34 @@ $(document).ready(function(){
       url: 'http://localhost:3000/events/viewType',
     });
   });
+
+  $('.fa-filter').click(function(){
+    $(this).toggleClass('clicked');
+    if ($(this).hasClass('clicked')){
+      $('#filterHolder').addClass('show');
+    }
+    else{
+      $('#filterHolder').removeClass('show');
+    }
+  });
+
+
+  // A few hotkey mappings
+  // Have to do weird keymappings to avoid the regular hotkeys
+  // Should probably consider doing this some other way
+  // Could use r for reload (or running event filters)
+  // x is another unused key
+  // This seems like enough key mappings for now, but may want more in future
+  $(document).keydown(function(e){
+    if( e.which === 70 && e.ctrlKey && e.shiftKey ){
+      e.preventDefault();
+      console.log('ctrl+shift+f'); 
+      triggerNameSearch();
+    }
+    if( e.which === 68 && e.ctrlKey && e.shiftKey ){
+      e.preventDefault();
+      console.log('ctrl+shift+d'); 
+      triggerTagSearch();
+    }
+  }); 
 });

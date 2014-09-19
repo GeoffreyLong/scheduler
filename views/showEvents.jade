@@ -7,9 +7,11 @@ block content
   span(class="fa fa-search fa-3x sideIcon")
   div(class="sideExpand search" id="tagSearch")
     input(placeholder="Search by Tags")
-  span(class="fa fa-bolt fa-3x sideIcon")
+  span(class="fa fa-filter fa-3x sideIcon")
+  div(class="sideExpand" id="filterHolder")
+    span(class="fa fa-bolt fa-2x")
   span(id="eventViews" class="fa fa-eye fa-3x sideIcon")
-  div(id="viewHolder")
+  div(class="sideExpand" id="viewHolder")
     span
       if (viewType == 'flat')
         span(class="fa fa-align-justify fa-2x viewIcon clicked" data-type='flat')
