@@ -343,8 +343,8 @@ $(document).ready(function(){
 
   var triggerNameSearch = function(){
     $('#nameSearch').toggleClass("show");
-    if ($('#nameSearch').hasClass("show")) $(this).addClass("clicked");
-    else if($('#nameSearch input').val() === '') $(this).removeClass("clicked");
+    if ($('#nameSearch').hasClass("show")) $('.fa-search').addClass("clicked");
+    else if($('#nameSearch input').val() === '') $('.fa-search').removeClass("clicked");
     $('#nameSearch input').focus();
     $('#nameSearch input').select();
     eventFilter.filterEvents($('.event'));
@@ -354,8 +354,8 @@ $(document).ready(function(){
   });
   var triggerTagSearch = function(){
     $('#tagSearch').toggleClass("show");
-    if ($('#tagSearch').hasClass("show")) $(this).addClass("clicked");
-    else if($('#tagSearch input').val() === '') $(this).removeClass("clicked");
+    if ($('#tagSearch').hasClass("show")) $('.fa-tags').addClass("clicked");
+    else if($('#tagSearch input').val() === '') $('.fa-tags').removeClass("clicked");
     $('#tagSearch input').focus();
     $('#tagSearch input').select();
     eventFilter.filterEvents($('.event'));
