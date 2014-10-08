@@ -2,7 +2,7 @@ scheduler
 =========
 <p>
   <h3> Setup </h3>
-  '''bash
+  ```bash
   # Clone the repository
   git clone https://github.com/GeoffreyLong/scheduler.git
   
@@ -28,7 +28,7 @@ scheduler
 
   # Launch Express app on localhost:3000 with debugging
   DEBUG=scheduler node ./bin/www
-  '''
+  ```
 </p>
 <p> 
   This is essentially a Productivity app.
