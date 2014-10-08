@@ -2,31 +2,31 @@ scheduler
 =========
 <p>
   <h3> Setup </h3>
-```shell
-# Clone the repository
+```sh
+#Clone the repository
 git clone https://github.com/GeoffreyLong/scheduler.git
 
-# Install MongoDB
+#Install MongoDB
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
 sudo apt-get update
 sudo apt-get install mongodb-10gen
 
-# Install Node
+#Install Node
 apt-get install curl
 curl -sL https://deb.nodesource.com/setup | bash -
 sudo apt-get install -y nodejs
 
-# cd into scheduler folder
+#cd into scheduler folder
 cd scheduler
 
-# Make /data/db folder where the db will be stored
+#Make /data/db folder where the db will be stored
 sudo mkdir -p /data/db
 
-# Start mongo instance
+#Start mongo instance
 sudo mongod
 
-# Launch Express app on localhost:3000 with debugging
+#Launch Express app on localhost:3000 with debugging
 DEBUG=scheduler node ./bin/www
 ```
 </p>
