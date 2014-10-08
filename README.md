@@ -2,7 +2,7 @@ scheduler
 =========
 <p>
   <h3> Setup </h3>
-```sh
+```Bash
 #Clone the repository
 git clone https://github.com/GeoffreyLong/scheduler.git
 
