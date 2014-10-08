@@ -16,14 +16,14 @@ apt-get install curl
 curl -sL https://deb.nodesource.com/setup | bash -
 sudo apt-get install -y nodejs
 
-#cd into scheduler folder
-cd scheduler
-
 #Make /data/db folder where the db will be stored
 sudo mkdir -p /data/db
 
 #Start mongo instance
 sudo mongod
+
+#cd into scheduler folder
+cd scheduler
 
 #Launch Express app on localhost:3000 with debugging
 DEBUG=scheduler node ./bin/www
