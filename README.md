@@ -2,33 +2,33 @@ scheduler
 =========
 <p>
   <h3> Setup </h3>
-  ```shell
-  # Clone the repository
-  git clone https://github.com/GeoffreyLong/scheduler.git
-  
-  # Install MongoDB
-  sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-  echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
-  sudo apt-get update
-  sudo apt-get install mongodb-10gen
+```shell
+# Clone the repository
+git clone https://github.com/GeoffreyLong/scheduler.git
 
-  # Install Node
-  apt-get install curl
-  curl -sL https://deb.nodesource.com/setup | bash -
-  sudo apt-get install -y nodejs
+# Install MongoDB
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+sudo apt-get update
+sudo apt-get install mongodb-10gen
 
-  # cd into scheduler folder
-  cd scheduler
+# Install Node
+apt-get install curl
+curl -sL https://deb.nodesource.com/setup | bash -
+sudo apt-get install -y nodejs
 
-  # Make /data/db folder where the db will be stored
-  sudo mkdir -p /data/db
+# cd into scheduler folder
+cd scheduler
 
-  # Start mongo instance
-  sudo mongod
+# Make /data/db folder where the db will be stored
+sudo mkdir -p /data/db
 
-  # Launch Express app on localhost:3000 with debugging
-  DEBUG=scheduler node ./bin/www
-  ```
+# Start mongo instance
+sudo mongod
+
+# Launch Express app on localhost:3000 with debugging
+DEBUG=scheduler node ./bin/www
+```
 </p>
 <p> 
   This is essentially a Productivity app.
