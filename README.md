@@ -1,8 +1,7 @@
 scheduler
 =========
-<p>
-  <h3> Setup </h3>
-```
+### SetUp
+```Bash
 #Clone the repository
 git clone https://github.com/GeoffreyLong/scheduler.git
 
@@ -29,7 +28,7 @@ sudo mongod
 #Launch Express app on localhost:3000 with debugging
 DEBUG=scheduler node ./bin/www
 ```
-</p>
+
 <p> 
   This is essentially a Productivity app.
   Scheduler is something of a misnomer and should probably be changed 
