@@ -118,4 +118,44 @@ $(document).ready(function(){
       triggerTagSearch();
     }
   }); 
+
+  // TODO
+  // Could extend to a model that doesn't change by
+  // Calling this fn for any show event and having a variable
+  // in routes/index.js which would hold the current showType
+  // Similar to how viewType is done I think
+  // Might want to do this for all filters
+  $('.showType').click(function(){
+    var params = {
+      type: 'GET',
+      contentType: 'application/json',
+      url: 'http://localhost:3000/events/show',
+      statusCode: {
+        200: function(data) {
+          // TODO show logic
+          var newHTML = $(data);
+          $('#subContent ul').replaceWith(newHTML.find('#subContent ul'));
+        },
+        400: function(data) {
+          alert("Didn't work");
+        }
+      }
+    };
+
+    var data = {};
+    data.showType = null;
+
+    if ($(this).hasClass('fa-check-square-o')){
+      data.showType = "completed";
+    }
+    else if ($(this).hasClass('fa-bookmark')){
+      data.showType = "activities";
+    }
+    else if ($(this).hasClass('fa-history')){
+      data.showType = "recent";
+    }
+
+    params.data = data;
+    $.ajax(params);
+  });
 });  

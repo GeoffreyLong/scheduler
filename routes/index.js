@@ -165,19 +165,41 @@ app.get('/events/eventForm/:id', function(req,res){
 
 // All the different filtering type event viewers
 app.get('/events/show', function(req,res) {
-  Event.find({completedOn: {$in : [null]}, eventType: {$ne : 'activity'}}).sort({priority: -1}).exec(function(error, response){
+  var findQuery = {};
+  var sortQuery = {};
+
+  if (req.query.showType == "completed"){
+    findQuery = {completedOn : {$nin: [null]}};
+    sortQuery = {'completedOn': -1};
+  }
+  else if (req.query.showType == "activities"){
+    findQuery = {eventType : 'activity'};
+    sortQuery = {'timeSheet.startTime': -1};
+  }
+  else if (req.query.showType == "recent"){
+    findQuery = {'timeSheet.startTime':{$gte:0}};
+    sortQuery = {'timeSheet.startTime': -1};
+  }
+  else {
+    findQuery = {completedOn: {$in : [null]}, eventType: {$ne : 'activity'}};
+    sortQuery = {priority: -1};
+  }
+
+  Event.find(findQuery).sort(sortQuery).exec(function(error, response){
     // will want to res.send the response back
-    console.log(error);
+    if(error) console.log(error);
+
+    // Temporary workaround
+    if (req.query.showType == "recent"){
+      response.forEach(function(elm){
+        elm.priority = 0;
+      });
+    }
+
     res.render('showEvents', { events: response, viewType: eventView, script: '/javascripts/showEvents.js' });
   });
 });
-// Sort not working properly
-app.get('/events/completed', function(req,res) {
-  Event.find({completedOn : {$nin: [null]}}).sort({'completedOn': -1}).exec(function(error, response){
-    // will want to res.send the response back
-    res.render('showEvents', { events: response, viewType: eventView, script: '/javascripts/showEvents.js' });
-  });
-});
+
 app.get('/events/running', function(req, res){
   Event.find({isRunning: true}, function(error, response){
     if (error){
@@ -187,25 +209,6 @@ app.get('/events/running', function(req, res){
     res.status(200).send(response);
   });
 });
-app.get('/activities/show', function(req, res){
-  //TODO change the sorting
-  Event.find({eventType : 'activity'}).sort({'timeSheet.startTime': -1}).exec(function(error, response){
-    // will want to res.send the response back
-    res.render('showEvents', { events: response, viewType: eventView, script: '/javascripts/showEvents.js' });
-  });
-});
-// TODO fix all this event vs activity logic
-app.get('/events/recent', function(req, res){
-  Event.find({'timeSheet.startTime':{$gte:0}}).sort({'timeSheet.startTime': -1}).limit(10).exec(function(error, response){
-    // will want to res.send the response back
-    console.log(response);
-    response.forEach(function(elm){
-      elm.priority = 0;
-    });
-    res.render('showEvents', { events: response, viewType: eventView, script: '/javascripts/showEvents.js' });
-  });
-});
-
 
 /*****************************/
 /******* Event Actions *******/
