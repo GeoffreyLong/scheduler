@@ -9,14 +9,11 @@ html
     script(src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js")
     script(type='text/javascript', src="/javascripts/layout.js")
     script(type='text/javascript', src=script)
+    block head
   body
     div(id="topBar")
       a(href="/" class="fa fa-home fa-3x topIcon")
       a(href="/events/show" class="fa fa-tasks fa-3x topIcon")
-      a(href='/activities/show' class='fa fa-bookmark fa-3x topIcon')
-      a(href="/events/completed" class="fa fa-check-square-o fa-3x topIcon")
-      a(href="/events/recent" class="fa fa-history fa-3x topIcon")
-      a(href="/events/eventForm/new" class="fa fa-magic fa-3x topIcon")
       a(href="#" class="fa fa-calendar-o fa-3x topIcon")
       a(href="#" class="fa fa-calendar fa-3x topIcon")
       ul(id="runningEvents")

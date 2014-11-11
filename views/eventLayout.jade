@@ -1,0 +1,33 @@
+extends layout
+
+block head
+  script(type='text/javascript', src="/javascripts/eventLayout.js")
+
+block content
+  div(id="sideBar")
+    span(class="fa fa-search fa-3x sideIcon")
+    div(class="sideExpand search" id="nameSearch")
+      input(placeholder="Search by Name")
+    span(class="fa fa-tags fa-3x sideIcon")
+    div(class="sideExpand search" id="tagSearch")
+      input(placeholder="Search by Tags")
+    span(class="fa fa-filter fa-3x sideIcon")
+    div(class="sideExpand" id="filterHolder")
+      span(class="fa fa-bolt fa-2x")
+    span(class="fa fa-eye fa-3x sideIcon" id="eventViews")
+    div(class="sideExpand" id="viewHolder")
+      span
+        if (viewType == 'flat')
+          span(class="fa fa-align-justify fa-2x viewIcon clicked" data-type='flat')
+          span(class="fa fa-indent fa-2x viewIcon" data-type='hierarchical')
+        else
+          span(class="fa fa-align-justify fa-2x viewIcon" data-type='flat')
+          span(class="fa fa-indent fa-2x viewIcon clicked" data-type='hierarchical')
+    a(href="/events/completed" class="fa fa-check-square-o fa-3x sideIcon" style="text-decoration:none")
+    a(href="/activities/show" class='fa fa-bookmark fa-3x sideIcon' style="text-decoration:none")
+    a(href="/events/recent" class="fa fa-history fa-3x sideIcon" style="text-decoration:none")      
+    a(href="/events/eventForm/new" class="fa fa-magic fa-3x topIcon sideIcon" style="text-decoration:none")
+
+
+  div(id="subContent")
+    block subContent

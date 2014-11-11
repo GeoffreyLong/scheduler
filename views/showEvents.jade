@@ -1,25 +1,6 @@
-extends layout
+extends eventLayout
 
-block content
-  span(class="fa fa-tags fa-3x sideIcon")
-  div(class="sideExpand search" id="nameSearch")
-    input(placeholder="Search by Name")
-  span(class="fa fa-search fa-3x sideIcon")
-  div(class="sideExpand search" id="tagSearch")
-    input(placeholder="Search by Tags")
-  span(class="fa fa-filter fa-3x sideIcon")
-  div(class="sideExpand" id="filterHolder")
-    span(class="fa fa-bolt fa-2x")
-  span(id="eventViews" class="fa fa-eye fa-3x sideIcon")
-  div(class="sideExpand" id="viewHolder")
-    span
-      if (viewType == 'flat')
-        span(class="fa fa-align-justify fa-2x viewIcon clicked" data-type='flat')
-        span(class="fa fa-indent fa-2x viewIcon" data-type='hierarchical')
-      else
-        span(class="fa fa-align-justify fa-2x viewIcon" data-type='flat')
-        span(class="fa fa-indent fa-2x viewIcon clicked" data-type='hierarchical')
-
+block subContent
   ul
     for event in events
       div(class="eventWrapper")

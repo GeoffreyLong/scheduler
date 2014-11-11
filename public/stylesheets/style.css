@@ -17,7 +17,18 @@ a{
   display:none;
 }
 
-/* TopBar */
+/**********************/
+/******* Layout *******/
+/**********************/
+#content{
+  position:absolute;
+  top:50px;
+}
+#indexContent{
+  padding-left:70px;
+}
+
+/******* TopBar *******/
 #topBar{
   top:0px;
   width:100%;
@@ -58,41 +69,38 @@ a{
   margin-right:10px;
   text-decoration:underline;
 }
-#content{
-  position:absolute;
-  top:50px;
-}
-#indexContent{
-  padding-left:70px;
-}
 
-/* Index */
+/*********************/
+/******* Index *******/
+/*********************/
 .indexLink{
   display: block;
   margin: 10px;
 }
 
-/* Show Events */
-.sideIcon{
+
+/***************************/
+/******* Show Events *******/
+/***************************/
+
+/******* showEvents.sideBar *******/
+#sideBar{
   position:fixed;
+  top:50px;
+  left:0px;
+  width: 50px;
   padding:5px;
+  padding-top:10px;
   z-index:1001;
 }
-.sideIcon.fa-search{
-  top:50px;
-}
-.sideIcon.fa-tags{
-  top:100px;
-}
-.sideIcon.fa-filter{
-  top:150px;
-}
-.sideIcon.fa-eye{
-  top:200px;
+.sideIcon{
+  margin-bottom:10px;
 }
 .sideExpand{
   margin-left:5px;
-  position:fixed;
+  position:absolute;
+  /* Sketchy to say the least */
+  margin-top:-52.5px;
   height:35px;
   left:50px;
   background:#000000;
@@ -101,29 +109,25 @@ a{
   -webkit-transition: width .5s ease;
   -moz-transition: width .5s ease;
   transition: width .5s ease;
+  padding-top:5px;
+  padding-bottom:5px;
 }
-#filterHolder{
-  top:157.5px;
-}
-#filterHolder span{
+
+#filterHolder > *{
   display:none;
 }
 #filterHolder.show{
   width:150px;
   overflow:hidden;
 }
-#filterHolder.show span{
+#filterHolder.show > *{
   display:inline;
 }
-#viewHolder{
-  top:207.5px;
-}
+
+/* weird css with the vert pos here */
 #filterHolder .fa{
   height:100%;
   margin:5px;
-  padding-left:5px;
-  padding-right:5px;
-  position: absolute;
   z-index:1001;
   color: #222222;
 }
@@ -133,11 +137,9 @@ a{
 #filterHolder .fa.clicked{
   color:#00B7FF;
 }
+
 .search.show{
   width:250px;
-}
-.search#nameSearch{
-  top:57.5px;
 }
 .search input{
   height:20px;
@@ -151,9 +153,7 @@ a{
 .sideIcon.clicked{
   color:#00B7FF;
 }
-.search#tagSearch{
-  top:107.5px;
-}
+
 #viewHolder.show{
   width:100px;
   overflow:hidden;
@@ -186,6 +186,7 @@ a{
 }
 
 
+/******* showEvents.event *******/
 li.event.createEvent{
   color: #209900;
   font-weight:bold;
