@@ -1,4 +1,7 @@
 $(document).ready(function(){
+  // TODO better regex matching stuff
+  var eventId = window.location.href.split("/eventForm/")[1];
+
   var allTags = [];
   $.ajax({
     type: 'POST',
@@ -156,6 +159,14 @@ $(document).ready(function(){
     data.dateCreated = Date.now();
 
     console.log(data.eventType);
+
+    // Define even if not used
+    // This helps for the update method so it doesn't get messed up.
+    data.recurranceInterval = null;
+    data.expectedDuration = null;
+    data.dueDate = null;
+    data.startDate = null;
+    data.endDate = null;
     switch(data.eventType){
       case "rTask":
         data.recurranceInterval = $('#recurranceInterval').val();
@@ -195,14 +206,12 @@ $(document).ready(function(){
       isValid = false;
     }
 
-    data.tag = tag;
+    data.tag = tag; 
 
     if (data.name != '' && isValid){
-      $.ajax({
+      var params = {
         type: 'POST',
-        data: JSON.stringify(data),
         contentType: 'application/json',
-        url: 'http://localhost:3000/event/create',
         statusCode: {
           200: function() {
             $('#success').dialog('open').delay(1000).fadeOut(1000, function(){
@@ -214,7 +223,19 @@ $(document).ready(function(){
             alert("Didn't work");
           }
         }
-      });
+      };
+
+      if (eventId != "new") {
+        data.id = eventId;
+        params.data = JSON.stringify(data);
+        params.url = 'http://localhost:3000/event/update';
+      }
+      else{
+        params.data = JSON.stringify(data);
+        params.url = 'http://localhost:3000/event/create';
+      }
+
+      $.ajax(params);
     }
   });
 });

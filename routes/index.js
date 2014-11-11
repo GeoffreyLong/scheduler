@@ -87,8 +87,32 @@ app.post('/event/create', function(req,res) {
   });
 });
 
-app.get('/events/eventForm', function(req,res) {
-  res.render('newEvents', { script: '/javascripts/newEvents.js' });
+
+// Could wrap update and create into one with 
+// a simple upsert = true in the params
+// and a change to update instead of findByIdAndUpdate
+app.post('/event/update', function(req,res) {
+  console.log(req.body);
+  Event.findByIdAndUpdate(req.body.id, 
+                          {$set: {
+                                    "eventType": req.body.eventType,
+                                    "name": req.body.name, 
+                                    "priority": req.body.priority,
+                                    "description": req.body.description,
+                                    "dueDate": req.body.dueDate,
+                                    "expectedDuration": req.body.expectedDuration,
+                                    "startDate": req.body.startDate,
+                                    "endDate": req.body.endDate,
+                                    "recurranceInterval": req.body.recurranceInterval,
+                                    "tag": req.body.tag
+                                 }},
+                          function(error, response){
+    if (error){
+      console.log(error);
+      res.status(500).send(error);
+    }
+    res.status(200).end();
+  });
 });
 
 // Probably best to do this via post so that people
@@ -104,29 +128,34 @@ app.post('/event/delete', function(req,res){
   });
 });
 
-app.get('/event/update/:id', function(req,res){
-  Event.findByIdAndRemove(req.params.id, function(err, response){
-    if (err){
-      console.log(err);
-      res.status(500).send(err);
-    }
+app.get('/events/eventForm/:id', function(req,res){
+  if (req.params.id == "new"){
+    res.render('newEvents', { script: '/javascripts/newEvents.js' });
+  }
+  else{
+    Event.findById(req.params.id, function(err, response){
+      if (err){
+        console.log(err);
+        res.status(500).send(err);
+      }
 
-    res.render('newEvents', {
-      eventType: response.eventType,
-      name: response.name,
-      priority: response.priority,
-      description: response.description,
-      dueDate: response.dueDate,
-      expectedDuration: response.expectedDuration,
-      startDate: response.startDate,
-      endDate: response.endDate,
-      recurranceInterval: response.recurranceInterval,
-      isRunning: response.isRunning,
-      tag: response.tag,
-      completedOn: response.completedOn,
-      script: '/javascripts/newEvents.js',
+      res.render('newEvents', {
+        eventType: response.eventType,
+        name: response.name,
+        priority: response.priority,
+        description: response.description,
+        dueDate: response.dueDate,
+        expectedDuration: response.expectedDuration,
+        startDate: response.startDate,
+        endDate: response.endDate,
+        recurranceInterval: response.recurranceInterval,
+        isRunning: response.isRunning,
+        tag: response.tag,
+        completedOn: response.completedOn,
+        script: '/javascripts/newEvents.js',
+      });
     });
-  });
+  }
 });
 
 app.get('/events/show', function(req,res) {

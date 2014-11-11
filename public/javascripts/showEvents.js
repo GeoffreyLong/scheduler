@@ -152,7 +152,7 @@ $(document).ready(function(){
     var event = $(this).parent().parent();
     var id = event.attr("data-id");
     console.log('update clicked, event_id = ' + id);      
-    window.location.replace("http://localhost:3000/event/update/" + id);
+    window.location.replace("http://localhost:3000/events/eventForm/" + id);
   });
 
   $('.startEvent').click(function(e){
