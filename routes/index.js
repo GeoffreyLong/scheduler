@@ -93,6 +93,9 @@ app.post('/event/create', function(req,res) {
 // and a change to update instead of findByIdAndUpdate
 app.post('/event/update', function(req,res) {
   console.log(req.body);
+
+  // May be able to simply pass the whole req.body into the set function
+  // Or I might be able to do an update(req.body)
   Event.findByIdAndUpdate(req.body.id, 
                           {$set: {
                                     "eventType": req.body.eventType,

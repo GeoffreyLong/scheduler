@@ -8,13 +8,25 @@ $(document).ready(function(){
       $(this).height(curHeight).animate({height: autoHeight}, 200);
     }
     else{
-      // This is the height we want it to be eventually
-      $(this).toggleClass("expand");
-      var endHeight = $(this).css('height', 'auto').height();
-      $(this).toggleClass("expand");
-      $(this).height(curHeight).animate({height: endHeight}, 200, function(){
+      /* Possible alternative... but as far as I can see it is not possible
+       * to select text from another area and click so probs not relevant?
+      var node = $(window.getSelection().getRangeAt(0).commonAncestorContainer);
+      if (!(node == this || node.parents(this).length)){
+        alert("ok");
+      }
+      */
+
+      // Check to see if there is text selected in the event box first
+      if (window.getSelection() == ""){
+
+        // This is the height we want it to be eventually
         $(this).toggleClass("expand");
-      });
+        var endHeight = $(this).css('height', 'auto').height();
+        $(this).toggleClass("expand");
+        $(this).height(curHeight).animate({height: endHeight}, 200, function(){
+          $(this).toggleClass("expand");
+        });
+      }
     }
   });
 
