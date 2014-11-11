@@ -96,6 +96,7 @@ app.post('/event/update', function(req,res) {
 
   // May be able to simply pass the whole req.body into the set function
   // Or I might be able to do an update(req.body)
+  // See link http://stackoverflow.com/questions/9369794/nodejs-mongoose-updating-all-fields-on-a-mongoose-model
   Event.findByIdAndUpdate(req.body.id, 
                           {$set: {
                                     "eventType": req.body.eventType,
@@ -161,6 +162,8 @@ app.get('/events/eventForm/:id', function(req,res){
   }
 });
 
+
+// All the different filtering type event viewers
 app.get('/events/show', function(req,res) {
   Event.find({completedOn: {$in : [null]}, eventType: {$ne : 'activity'}}).sort({priority: -1}).exec(function(error, response){
     // will want to res.send the response back
@@ -168,7 +171,6 @@ app.get('/events/show', function(req,res) {
     res.render('showEvents', { events: response, viewType: eventView, script: '/javascripts/showEvents.js' });
   });
 });
-
 // Sort not working properly
 app.get('/events/completed', function(req,res) {
   Event.find({completedOn : {$nin: [null]}}).sort({'completedOn': -1}).exec(function(error, response){
@@ -176,19 +178,6 @@ app.get('/events/completed', function(req,res) {
     res.render('showEvents', { events: response, viewType: eventView, script: '/javascripts/showEvents.js' });
   });
 });
-
-app.get('/calendar/month', function(req, res){
-  res.render('showMonth', { script: '/javascripts/showMonth.js' });
-});
-
-app.get('/calendar/week', function(req, res){
-  res.render('showWeek', { script: '/javascripts/showWeek.js' });
-});
-
-app.get('/calendar/day', function(req, res){
-  res.render('showDay', { script: '/javascripts/showDay.js' });
-});
-
 app.get('/events/running', function(req, res){
   Event.find({isRunning: true}, function(error, response){
     if (error){
@@ -198,6 +187,29 @@ app.get('/events/running', function(req, res){
     res.status(200).send(response);
   });
 });
+app.get('/activities/show', function(req, res){
+  //TODO change the sorting
+  Event.find({eventType : 'activity'}).sort({'timeSheet.startTime': -1}).exec(function(error, response){
+    // will want to res.send the response back
+    res.render('showEvents', { events: response, viewType: eventView, script: '/javascripts/showEvents.js' });
+  });
+});
+// TODO fix all this event vs activity logic
+app.get('/events/recent', function(req, res){
+  Event.find({'timeSheet.startTime':{$gte:0}}).sort({'timeSheet.startTime': -1}).limit(10).exec(function(error, response){
+    // will want to res.send the response back
+    console.log(response);
+    response.forEach(function(elm){
+      elm.priority = 0;
+    });
+    res.render('showEvents', { events: response, viewType: eventView, script: '/javascripts/showEvents.js' });
+  });
+});
+
+
+/*****************************/
+/******* Event Actions *******/
+/*****************************/
 
 app.post('/event/action/start', function(req, res){
   Event.findByIdAndUpdate(req.body.id, 
@@ -226,7 +238,6 @@ app.post('/event/action/pause', function(req, res){
     res.status(200).end();
   });
 });
-
 
 // See if I can do this in one query
 app.post('/event/action/complete', function(req, res){
@@ -263,6 +274,42 @@ app.post('/event/action/uncomplete', function(req, res){
   });
 });
 
+
+
+/******* Tags *******/
+app.post('/event/tags', function(req, res){
+  Tag.find().exec(function(error, response){
+    if (error){
+      console.log(error);
+      res.status(500).send(error);
+    }
+    res.status(200).send(response);
+  });
+});
+
+/******* Tags *******/
+app.post('/event/tag/create', function(req, res){
+  console.log(req.body);
+  new Tag({
+    name : req.body.name,
+  }).save(function(err,saved){
+    if (err) res.status(500).send(err);
+    res.status(200).end();
+  });  
+});
+
+
+// TODO put into user schema when we have one
+app.post('/events/viewType', function(req,res){
+  eventView = req.body.viewType;
+});
+
+
+
+
+/*****************************/
+/******* Event Metrics *******/
+/*****************************/
 
 //Extend to things like tag aggregation
 app.post('/event/metric/timespent', function(req, res){
@@ -327,49 +374,19 @@ app.post('/event/metric/eventTime', function(req, res){
     });
 });
 
-app.post('/event/tags', function(req, res){
-  Tag.find().exec(function(error, response){
-    if (error){
-      console.log(error);
-      res.status(500).send(error);
-    }
-    res.status(200).send(response);
-  });
+
+app.get('/calendar/month', function(req, res){
+  res.render('showMonth', { script: '/javascripts/showMonth.js' });
 });
 
-app.post('/event/tag/create', function(req, res){
-  console.log(req.body);
-  new Tag({
-    name : req.body.name,
-  }).save(function(err,saved){
-    if (err) res.status(500).send(err);
-    res.status(200).end();
-  });  
+app.get('/calendar/week', function(req, res){
+  res.render('showWeek', { script: '/javascripts/showWeek.js' });
 });
 
-app.get('/activities/show', function(req, res){
-  //TODO change the sorting
-  Event.find({eventType : 'activity'}).sort({'timeSheet.startTime': -1}).exec(function(error, response){
-    // will want to res.send the response back
-    res.render('showEvents', { events: response, viewType: eventView, script: '/javascripts/showEvents.js' });
-  });
+app.get('/calendar/day', function(req, res){
+  res.render('showDay', { script: '/javascripts/showDay.js' });
 });
 
-// TODO fix all this event vs activity logic
-app.get('/events/recent', function(req, res){
-  Event.find({'timeSheet.startTime':{$gte:0}}).sort({'timeSheet.startTime': -1}).limit(10).exec(function(error, response){
-    // will want to res.send the response back
-    console.log(response);
-    response.forEach(function(elm){
-      elm.priority = 0;
-    });
-    res.render('showEvents', { events: response, viewType: eventView, script: '/javascripts/showEvents.js' });
-  });
-});
 
-// TODO put into user schema when we have one
-app.post('/events/viewType', function(req,res){
-  eventView = req.body.viewType;
-});
 
 module.exports = app;

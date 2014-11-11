@@ -95,7 +95,9 @@ $(document).ready(function(){
         }
       }
     });
-  }; todaysMetrics();
+  }; 
+  
+  todaysMetrics();
 
   var tagBreakDown = function(){
     allTags.forEach(function(elm){
