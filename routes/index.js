@@ -167,6 +167,8 @@ app.get('/events/eventForm/:id', function(req,res){
 app.get('/events/show', function(req,res) {
   var findQuery = {};
   var sortQuery = {};
+  // Temp value
+  var limit = 10000;
 
   if (req.query.showType == "completed"){
     findQuery = {completedOn : {$nin: [null]}};
@@ -179,13 +181,14 @@ app.get('/events/show', function(req,res) {
   else if (req.query.showType == "recent"){
     findQuery = {'timeSheet.startTime':{$gte:0}};
     sortQuery = {'timeSheet.startTime': -1};
+    limit = 10;
   }
   else {
     findQuery = {completedOn: {$in : [null]}, eventType: {$ne : 'activity'}};
     sortQuery = {priority: -1};
   }
 
-  Event.find(findQuery).sort(sortQuery).exec(function(error, response){
+  Event.find(findQuery).sort(sortQuery).limit(limit).exec(function(error, response){
     // will want to res.send the response back
     if(error) console.log(error);
 
