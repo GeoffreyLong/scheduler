@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $('.event').click(function(){
+  $('#subContent').on('click', '.event', function(){
     // Hacky workaround
     var curHeight = $(this).height();
     if (!$(this).hasClass("expand")){
@@ -121,7 +121,7 @@ $(document).ready(function(){
   };
 
 
-  $('.deleteEvent').click(function(e){
+  $('#subContent').on('click', '.deleteEvent', function(e){
     e.stopPropagation();
     var event = $(this).parent().parent();
     var id = event.attr("data-id");
@@ -161,7 +161,7 @@ $(document).ready(function(){
     }
   });
 
-  $('.updateEvent').click(function(e){
+  $('#subContent').on('click', '.updateEvent', function(e){
     e.stopPropagation();
     var event = $(this).parent().parent();
     var id = event.attr("data-id");
@@ -169,7 +169,7 @@ $(document).ready(function(){
     window.location.replace("http://localhost:3000/events/eventForm/" + id);
   });
 
-  $('.startEvent').click(function(e){
+  $('#subContent').on('click', '.startEvent', function(e){
     e.stopPropagation();
     var event = $(this).parent().parent();
     if (!event.hasClass('running')){
@@ -212,7 +212,7 @@ $(document).ready(function(){
     }
   });
 
-  $('.pauseEvent').click(function(e){
+  $('#subContent').on('click', '.pauseEvent', function(e){
     e.stopPropagation();
     var event = $(this).parent().parent();
     if (event.hasClass('running')){
@@ -254,7 +254,7 @@ $(document).ready(function(){
   });
 
   // Should add other metrics here
-  $('.metrics').click(function(e){
+  $('#subContent').on('click', '.metrics', function(e){
     e.stopPropagation();
     var event = $(this).parent();
     var eventWrapper = event.parent();
@@ -297,7 +297,7 @@ $(document).ready(function(){
     }
   });
 
-  $('.completeEvent').click(function(e){
+  $('#subContent').on('click', '.completeEvent', function(e){
     e.stopPropagation();
     var event = $(this).parent().parent();
     data = {};
@@ -331,7 +331,7 @@ $(document).ready(function(){
     });
   });
 
-  $('.unCompleteEvent').click(function(e){
+  $('#subContent').on('click', '.unCompleteEvent', function(e){
     e.stopPropagation();
     var event = $(this).parent().parent();
     data = {};
