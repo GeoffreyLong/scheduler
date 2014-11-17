@@ -175,11 +175,11 @@ app.get('/events/show', function(req,res) {
     sortQuery = {'completedOn': -1};
   }
   else if (req.query.showType == "activities"){
-    findQuery = {eventType : 'activity'};
+    findQuery = {eventType : 'activity', completedOn: {$in : [null]}};
     sortQuery = {'timeSheet.startTime': -1};
   }
   else if (req.query.showType == "recent"){
-    findQuery = {'timeSheet.startTime':{$gte:0}};
+    findQuery = {'timeSheet.startTime':{$gte:0}, completedOn: {$in : [null]}};
     sortQuery = {'timeSheet.startTime': -1};
     limit = 10;
   }
