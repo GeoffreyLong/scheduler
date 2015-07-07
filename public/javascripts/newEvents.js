@@ -6,7 +6,7 @@ $(document).ready(function(){
   $.ajax({
     type: 'POST',
     contentType: 'application/json',
-    url: 'http://localhost:3000/event/tags',
+    url: '/event/tags',
     async: false,
     statusCode: {
       200: function(data) {
@@ -41,7 +41,7 @@ $(document).ready(function(){
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(data),
-        url: 'http://localhost:3000/event/tag/create',
+        url: '/event/tag/create',
         async: false,
         statusCode: {
           200: function(data) {
@@ -216,7 +216,7 @@ $(document).ready(function(){
           200: function() {
             $('#success').dialog('open').delay(1000).fadeOut(1000, function(){
               $('#success').dialog('close');
-              window.location.replace("http://localhost:3000/events/show");
+              window.location.replace("/events/show");
             });
           },
           400: function() {
@@ -228,11 +228,11 @@ $(document).ready(function(){
       if (eventId != "new") {
         data.id = eventId;
         params.data = JSON.stringify(data);
-        params.url = 'http://localhost:3000/event/update';
+        params.url = '/event/update';
       }
       else{
         params.data = JSON.stringify(data);
-        params.url = 'http://localhost:3000/event/create';
+        params.url = '/event/create';
       }
 
       $.ajax(params);

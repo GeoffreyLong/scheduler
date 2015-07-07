@@ -34,7 +34,7 @@ $(document).ready(function(){
   $.ajax({
     type: 'POST',
     contentType: 'application/json',
-    url: 'http://localhost:3000/event/tags',
+    url: '/event/tags',
     statusCode: {
       200: function(data) {
         data.forEach(function(elm){
@@ -64,7 +64,7 @@ $(document).ready(function(){
       type: 'POST',
       data: JSON.stringify(data),
       contentType: 'application/json',
-      url: 'http://localhost:3000/event/metric/eventTime',
+      url: '/event/metric/eventTime',
       statusCode: {
         200: function(data) {
           var date = new Date();
@@ -134,7 +134,7 @@ $(document).ready(function(){
         type: 'POST',
         data: JSON.stringify(data),
         contentType: 'application/json',
-        url: 'http://localhost:3000/event/delete',
+        url: '/event/delete',
         statusCode: {
           200: function() {
             /*alert("Successfully added").delay(1000).fadeOut(function() {
@@ -166,7 +166,7 @@ $(document).ready(function(){
     var event = $(this).parent().parent();
     var id = event.attr("data-id");
     console.log('update clicked, event_id = ' + id);      
-    window.location.replace("http://localhost:3000/events/eventForm/" + id);
+    window.location.replace("/events/eventForm/" + id);
   });
 
   $('#subContent').on('click', '.startEvent', function(e){
@@ -186,7 +186,7 @@ $(document).ready(function(){
         type: 'POST',
         data: JSON.stringify(data),
         contentType: 'application/json',
-        url: 'http://localhost:3000/event/action/start',
+        url: '/event/action/start',
         statusCode: {
           200: function() {
             event.addClass('running');
@@ -229,7 +229,7 @@ $(document).ready(function(){
         type: 'POST',
         data: JSON.stringify(data),
         contentType: 'application/json',
-        url: 'http://localhost:3000/event/action/pause',
+        url: '/event/action/pause',
         statusCode: {
           200: function() {
             event.removeClass('running');
@@ -271,7 +271,7 @@ $(document).ready(function(){
         type: 'POST',
         data: JSON.stringify(data),
         contentType: 'application/json',
-        url: 'http://localhost:3000/event/metric/timespent',
+        url: '/event/metric/timespent',
         statusCode: {
           200: function(data) {
             var ms = data.total;
@@ -308,7 +308,7 @@ $(document).ready(function(){
       type: 'POST',
       data: JSON.stringify(data),
       contentType: 'application/json',
-      url: 'http://localhost:3000/event/action/complete',
+      url: '/event/action/complete',
       statusCode: {
         200: function() {
           $('#runningEvents').find('li[data-id="' + data.id + '"]').remove();
@@ -342,7 +342,7 @@ $(document).ready(function(){
       type: 'POST',
       data: JSON.stringify(data),
       contentType: 'application/json',
-      url: 'http://localhost:3000/event/action/uncomplete',
+      url: '/event/action/uncomplete',
       statusCode: {
         200: function() {
           $('#runningEvents').find('li[data-id="' + data.id + '"]').remove();

@@ -85,7 +85,7 @@ $(document).ready(function(){
       type: 'POST',
       data: JSON.stringify(data),
       contentType: 'application/json',
-      url: 'http://localhost:3000/events/viewType',
+      url: '/events/viewType',
     });
   });
 
@@ -129,7 +129,7 @@ $(document).ready(function(){
     var params = {
       type: 'GET',
       contentType: 'application/json',
-      url: 'http://localhost:3000/events/show',
+      url: '/events/show',
       statusCode: {
         200: function(data) {
           // TODO show logic

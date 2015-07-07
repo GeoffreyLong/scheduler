@@ -1,7 +1,7 @@
 $(document).ready(function(){
   $.ajax({
     type: 'GET',
-    url: 'http://localhost:3000/events/running',
+    url: '/events/running',
     statusCode: {
       200: function(data) {
         var ul = $('#runningEvents');
@@ -49,7 +49,7 @@ $(document).ready(function(){
       type: 'POST',
       data: JSON.stringify(data),
       contentType: 'application/json',
-      url: 'http://localhost:3000/event/action/pause',
+      url: '/event/action/pause',
       statusCode: {
         200: function() {
           event.removeClass('running');

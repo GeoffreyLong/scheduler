@@ -3,7 +3,7 @@ $(document).ready(function(){
   /*$.ajax({
     type: 'POST',
     contentType: 'application/json',
-    url: 'http://localhost:3000/event/tags',
+    url: '/event/tags',
     async: false,
     statusCode: {
       200: function(data) {
@@ -39,7 +39,7 @@ $(document).ready(function(){
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(data),
-        url: 'http://localhost:3000/event/tag/create',
+        url: '/event/tag/create',
         async: false,
         statusCode: {
           200: function(data) {
