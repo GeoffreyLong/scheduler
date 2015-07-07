@@ -95,6 +95,7 @@ a{
 }
 .sideIcon{
   margin-bottom:10px;
+  cursor:pointer;
 }
 .sideExpand{
   margin-left:5px;
